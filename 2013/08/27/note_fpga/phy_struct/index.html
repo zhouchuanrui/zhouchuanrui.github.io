@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>FPGA的基本物理结构 | Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[TOC]
+IO
+
+输入/输出单元简称I/O单元,他们是芯片与外界电路的接口部分,完成不同电气特性下对输入/输出信号的驱动与匹配需求.为了使FPGA有更灵活的应用,目前大多数FPGA的I/O单元被设计为可编程模式,即通过软件的灵活配置,可以适应不同的电气标准与I/O特性;可以调整匹配阻抗特性,上下拉电阻;可以调整输出驱动电流的大小等.
+
+这个其实比较好理解，FPGA的管脚是可以配制成输入、输出、双">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FPGA的基本物理结构">
+<meta property="og:url" content="http://yoursite.com/2013/08/27/note_fpga/phy_struct/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="[TOC]
+IO
+
+输入/输出单元简称I/O单元,他们是芯片与外界电路的接口部分,完成不同电气特性下对输入/输出信号的驱动与匹配需求.为了使FPGA有更灵活的应用,目前大多数FPGA的I/O单元被设计为可编程模式,即通过软件的灵活配置,可以适应不同的电气标准与I/O特性;可以调整匹配阻抗特性,上下拉电阻;可以调整输出驱动电流的大小等.
+
+这个其实比较好理解，FPGA的管脚是可以配制成输入、输出、双">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FPGA的基本物理结构">
+<meta name="twitter:description" content="[TOC]
+IO
+
+输入/输出单元简称I/O单元,他们是芯片与外界电路的接口部分,完成不同电气特性下对输入/输出信号的驱动与匹配需求.为了使FPGA有更灵活的应用,目前大多数FPGA的I/O单元被设计为可编程模式,即通过软件的灵活配置,可以适应不同的电气标准与I/O特性;可以调整匹配阻抗特性,上下拉电阻;可以调整输出驱动电流的大小等.
+
+这个其实比较好理解，FPGA的管脚是可以配制成输入、输出、双">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-note_fpga/phy_struct" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/08/27/note_fpga/phy_struct/" class="article-date">
+  <time datetime="2013-08-27T13:21:55.000Z" itemprop="datePublished">Aug 27 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FPGA的基本物理结构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="IO">IO</h1>
+<blockquote>
+<p>输入/输出单元简称I/O单元,他们是芯片与外界电路的接口部分,完成不同电气特性下对输入/输出信号的驱动与匹配需求.为了使FPGA有更灵活的应用,目前大多数FPGA的I/O单元被设计为可编程模式,即通过软件的灵活配置,可以适应不同的电气标准与I/O特性;可以调整匹配阻抗特性,上下拉电阻;可以调整输出驱动电流的大小等.</p>
+</blockquote>
+<p>这个其实比较好理解，FPGA的管脚是可以配制成输入、输出、双向的，这个是要改变内阻特性的；然后管脚可以灵活的连接到任意内部单元，这个算是FPGA最强大的地方，这个就需要配置内部的连线；然后还有差分对IO，之前没用过的，物理特性也是很不一样的。</p>
+<a id="more"></a>
+
+<h1 id="基本可编程逻辑单元">基本可编程逻辑单元</h1>
+<blockquote>
+<p>基本可编程逻辑单元是可编程逻辑的主体,可以根据设计灵活地改变其内部连接与配置,完成不同的逻辑功能.FPGA一般是基于SRAM工艺的,其基本可编程逻辑单元几乎都是由查找表(LUT, Look Up Table)和寄存器(Register)组成的.FPGA内部的查找表一般为4输入，查找表一般完成纯组合逻辑功能.FPGA内部寄存器结构相当灵活,可以配置成为带同步/异步复位或置位,时钟使能的触发器(FF, Flip Flop),也可以配置成为锁存器(Latch).FPGA一般依赖寄存器完成同步时序逻辑设计.一般来说,比较经典的基本可编程单元的配置是一个寄存器加一个查找表,但是不同厂商的寄存器和查找表的内部结构有一定的差异,而且寄存器和查找表的组合模式也不同.例如,Altera的可编程逻辑单元通常被称为LE(Logic Element),由一个Register和一个LUT组成.Altera大多数FPGA将10个LE有机的组合起来,成更大的功能单元——逻辑阵列模块(LAB,Logic Array Block),LAB中除了LE还包含LE间的进位链,LAB控制信号,局部互联布线资源,LUT级联链,寄存器级联链等连线与控制资源.Xilinx可编程逻辑单元叫做Slice,它是由上下两个部分构成,每个部分都由一个Register加一个LUT组成,被称为LC(Logic Cell,逻辑单元),两个LC之间有一些共用逻辑,可以完成LC之间的配合和级联.Lattice的底层逻辑单元叫做PFU(Programmable Function unit,可编程功能单元),它由8个LUT和8~9个Register组成.当然这些可编程逻辑单元的配置结构随着器件的发展也在不断更新,最新的一些可编程逻辑器件通常根据设计需要推出一些新的LUT和Register的配置比率,并优化其内部的连接构造.</p>
+</blockquote>
+<p>这个部分一直都没有好好看看，就记得SRAM、查找表这几个名词而已。现在看了这段话，觉得明白了很多细节方面的东西，比如Quartus的编译报告里面的逻辑单元为什么会分成两部分。</p>
+<p>然后感觉还是有些地方不清楚的，就是SRAM工艺体现在哪里？查找表跟SRAM是好理解的，但是寄存器呢？还有逻辑单元的连线是怎么实现的，是SRAM？还有查找表为什么是4输入1输出的？</p>
+<h1 id="布线资源">布线资源</h1>
+<blockquote>
+<p>布线资源连通FPGA内部所有单元,连线的长度和工艺决定着信号在连线上的驱动能力和传输速度.FPGA内部有着非常丰富的布线资源,这些布线资源根据工艺,长度,宽度和分布位置的不同而被划分为不同的等级,有一些是全局性的专用布线资源,用以完成器件内部的全局时钟和全局复位/置位的布线;一些叫做长线资源,用以完成器件Bank间的一些高速信号和一些第二全局信号的布线;还有一些叫做短线资源,用以完成基本逻辑单元之前的逻辑互联与布线;另外,在基本逻辑单元内部还有着各式各样的布线资源和专用时钟,复位等控制信号线.</p>
+</blockquote>
+<p>这个部分资料里面对于布线是什么还有布线是怎么实现的说的不清不楚，只能靠自己猜测。这个布线其实归根到底还是由编译好的编程文件来配置的，就是说肯是以二进编码来描述的。这样的话，可以猜测这个布线体系其实是由一个个开关组成的，所有开关状态由编程文件决定。然后这些开关是不是就是SRAM的数据块呢，这个很有可能啊。</p>
+<h1 id="其他硬件模块">其他硬件模块</h1>
+<p>上面的几个东西是FPGA中最基本东西，剩下的东西就没什么了，就放到一起记了。</p>
+<h2 id="嵌入式块RAM">嵌入式块RAM</h2>
+<blockquote>
+<p>目前大多数FPGA都有内嵌的块RAM,可以灵活的配置为单端口RAM,双端口RAM,伪双端口RAM,CAM,ROM,FIFO等.不同器件的内嵌RAM结构不同,Xilinx常见的块RAM大小是4kbit和18kbit,Lattice常用的块RAM大小是9kbit,Atera的有M512,M4K等.</p>
+</blockquote>
+<p>之前在IP核配置里面会经常见到M512、M4k的字眼，当时还反应不过来这个原来指的就是RAM的容量。</p>
+<h2 id="嵌入功能单元">嵌入功能单元</h2>
+<p>就是PLL，DLL(功能跟PLL是一样的)，DSP还有CPU这些。</p>
+<p>PLL没得说，只能通过硬件实现，这个也是现在的FPGA里面一定会有的东西。DSP其实就是静态乘法器。CPU应该是高端器件里面才会有的东西，我其实是很看好CPU嵌入FPGA这种方式的，CPU的功能抽象能力加上FPGA逻辑单元的高速数据传输还有灵活的管脚配置，这样很是完美。</p>
+<h1 id="专用硬核">专用硬核</h1>
+<p>指的是一些非常高速的串并收发单元，这个是用于专业场合的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/08/27/note_fpga/phy_struct/" data-id="c2r6mq6ozephy2dz" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/08/28/note_fpga/quartus_tabs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Quartus标签页消失补救
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/08/04/note_fpga/truth_table_to_term/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">真值表到最小/大项表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/tmp/">用于分立RAM的宏</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ignorance is a rare rare blessing~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Central Perk">
+<meta property="og:url" content="http://yoursite.com/page/2/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="Ignorance is a rare rare blessing~">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Central Perk">
+<meta name="twitter:description" content="Ignorance is a rare rare blessing~">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-note_scholar/digit_signal_transmission" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/31/note_scholar/digit_signal_transmission/" class="article-date">
+  <time datetime="2013-12-31T02:52:16.000Z" itemprop="datePublished">Dec 31 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/31/note_scholar/digit_signal_transmission/">为什么数字信号不能直接远距离传输</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>特地去查了下相关的资料, 总结起来是两个原因:</p>
+<ol>
+<li>带有直流分量, 传输的能量损耗更大;</li>
+<li>频率成分太复杂, 频谱理论上是无穷大的, 传输中的高频信号衰减太厉害;</li>
+</ol>
+<p>在看第一个原因的时候, 我想到的是曼彻斯特码, 232电平这些东西. 但后来想想这些其实已经是处理过的串行协议信号, 不是纯粹的类似并行读写时序信号这类”直接的数字信号”了.</p>
+<p>然后又捎带了解了下传输线的一些常识:</p>
+<ul>
+<li>双绞线中一根导线上的电磁波是与另外一根导线上的电磁波相互抵消的, 用于传输差分信号, 有很强的抗干扰能力.</li>
+<li>同轴电缆用于传输单端信号, 可以远距离传输很高频率的信号.</li>
+</ul>
+<p>这两种线传输的都已经是交流信号了.</p>
+<p>不过频率低的”协议型”串行数字信号肯定也是可以用这两种线来传输的, PPS信号和IRIG-B直流码用同轴电缆我是见过的.</p>
+<p>所以”为什么数字信号不能直接远距离传输”也是针对广义数字信号的, 还是取决于这种数字信号的类型和频率范围的.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/12/31/note_scholar/digit_signal_transmission/" data-id="nq6clsk15zu5fk1v" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_scholar/asst_pm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/11/11/note_scholar/asst_pm/" class="article-date">
+  <time datetime="2013-11-11T02:04:40.000Z" itemprop="datePublished">Nov 11 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/11/11/note_scholar/asst_pm/">pm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="摘要">摘要</h1>
+<p>面向电磁式互感器的全场景试验系统是模拟电磁式互感器的变电站二次设备分布式测试系统。系统的子终端由数字控制模块、接口模块和模拟量输出模块构成。为了保证子终端能很好的保持模拟量输出的精度一致性和同步一致性，本系统利用DSP和FPGA器件实现了终端运行参数的管理系统，可以方便的实现终端运行参数的修改、保存和实时分配。</p>
+<p>关键字：全场景试验系统；DSP；FPGA；Flash API；参数修正</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/11/11/note_scholar/asst_pm/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/11/11/note_scholar/asst_pm/" data-id="lhm1pju35rpahvey" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/syn_attr" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/11/02/note_fpga/syn_attr/" class="article-date">
+  <time datetime="2013-11-02T12:44:37.000Z" itemprop="datePublished">Nov 2 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/11/02/note_fpga/syn_attr/">真正的Synthesis Attributes用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="起因">起因</h1>
+<p>最早的时候我在用SignalTap的时候，就发现Node Finder里面有Register这个选项，但是有些（其实可以算大部分）信号是没有的。后来网上找到的解释是这些没有输出到output的信号是会被综合工具优化掉的。</p>
+<p>然后找到的解决方案是，把这些信号设置为输出，并在Assignment Editor里面设为virtual pin（因为没有这么多物理管脚的），这样就可以在Node Finder的Pins里面用了。</p>
+<p>这个方法是有效的，主要我当时用的是Emacs。随着时间的推进，virtual pin自然是越来越多，今天翻看之前的一个工程，发现virtual pin就有2000多，很是骇人。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/11/02/note_fpga/syn_attr/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/11/02/note_fpga/syn_attr/" data-id="q9ka0j2npjavxmf1" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_emacs/many_languages" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/10/17/note_emacs/many_languages/" class="article-date">
+  <time datetime="2013-10-17T02:38:29.000Z" itemprop="datePublished">Oct 17 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/10/17/note_emacs/many_languages/">编程语言的新体会</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>王垠在<a href="http://www.yinwang.org/blog-cn/2013/06/23/one-lang-not-enough/" target="_blank" rel="external">【为什么一种程序语言是不够的】</a>这篇文章中说：</p>
+<blockquote>
+<p>我们都知道，程序语言里包含了变量，数字，对象，函数等“元素”。它们就像物理学的基本粒子一样，可以用于构造我们所需要的几乎任何“模型”。既然所有的东西都是用基本粒子组成的，那么除了物理学，我们为什么还要有化学和生物？化学家使用的语言是化学元素，它们比基本粒子大很多。生物学家的语言就更大一些了，处于细胞的级别。那么为什么化学家和生物学家不使用基本粒子来描述他们的领域呢？<br>那是因为基本粒子无法提供足够的“抽象”。它们到底是如何组成原子，原子又如何能产生细胞，这些事情到现在还没搞清楚。用基本粒子来表示化学和生物学，那么我们恐怕要等很久很久以后才能描述化学和生物的现象和原理。</p>
+</blockquote>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/10/17/note_emacs/many_languages/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/10/17/note_emacs/many_languages/" data-id="eehb8kmsw5ts6aai" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_scholar/hugps" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/23/note_scholar/hugps/" class="article-date">
+  <time datetime="2013-09-23T07:53:19.000Z" itemprop="datePublished">Sep 23 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/09/23/note_scholar/hugps/">GPS的正确用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="GPS模块与NMEA-1800协议">GPS模块与NMEA-1800协议</h1>
+<p>GPS模块的基本输入输出构成是：</p>
+<ul>
+<li>天线，用来接收GPS卫星信号：</li>
+<li>PPS输出；</li>
+<li>串口模块，用来配置模块的工作模式以及NMEA-1800码串口输出格式；</li>
+</ul>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/09/23/note_scholar/hugps/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/09/23/note_scholar/hugps/" data-id="byipjdgd18c3cc82" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/trifreq" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/04/note_fpga/trifreq/" class="article-date">
+  <time datetime="2013-09-04T07:10:49.000Z" itemprop="datePublished">Sep 4 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/09/04/note_fpga/trifreq/">3倍数字分频器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="分频器很简单">分频器很简单</h1>
+<p>据说这种题目会出现在笔试题里, 我一听说3倍分频器, 我不加思索以为这个是PLL才做的出来的. </p>
+<p>我在网上搜了才知道这个是真的可以实现的, 而且是有直接的verilog代码. 要碰上这种题目的话我估计是马上要悲剧的. </p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/09/04/note_fpga/trifreq/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/09/04/note_fpga/trifreq/" data-id="nmj1fr6rm2sy21d0" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_emacs/regex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/01/note_emacs/regex/" class="article-date">
+  <time datetime="2013-09-01T13:15:04.000Z" itemprop="datePublished">Sep 1 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/09/01/note_emacs/regex/">正则表达式学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="简述">简述</h1>
+<p>正则表达式就是regular expression，简写是regex或者regexp。</p>
+<p>正则表达式就是用一组特定字符串来描述一段文本规律，用来查找文本用的，对我来说的话就是在编辑器里面用用。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/09/01/note_emacs/regex/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/09/01/note_emacs/regex/" data-id="ngnnim74rghs2rlv" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_scholar/fastdft" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/01/note_scholar/fastdft/" class="article-date">
+  <time datetime="2013-09-01T03:11:53.000Z" itemprop="datePublished">Sep 1 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/09/01/note_scholar/fastdft/">电力系统基波向量的快速算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="概述">概述</h1>
+<p>电力系统线路稳态信号为50HZ的交流正弦（余弦）信号。对这个信号进行一个周期的一路信号进行采样，再进行离散傅立叶变换，可以得到这个时刻的频域信息。</p>
+<p>其中，电力系统向量计算就是求出同一时刻所有线路的基波（ 50HZ频域分量）相位，进行快速的向量计算是提升电力系统测量控制系统性能的一大关键。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/09/01/note_scholar/fastdft/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/09/01/note_scholar/fastdft/" data-id="evykj1hg5onvfh5w" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_vim/vn_vg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/08/28/note_vim/vn_vg/" class="article-date">
+  <time datetime="2013-08-28T03:18:05.000Z" itemprop="datePublished">Aug 28 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/08/28/note_vim/vn_vg/">Vundle和git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言">前言</h2>
+<p>Vundle是现在管理vim插件的主流，但是折腾到现在才装起来。Vundle是基于git的一个插件，github简直是vim插件最完美的一个社区，而且当下基本所有的vim插件项目都托管到github了。</p>
+<p>我觉得Vundle对像我这种初级用户还是有点距离的，原因主要是对git概念的不甚理解。原先git就是Linux下的工具，像我这种Windows用户知道这个名字是通过github这个很火网站，而且很长的时间里面我一直认为git就是指的github，虽然git跟github的关系是非常大的。</p>
+<p>搞清楚git是什么东西花了我很长的时间，然后要用安装使用软件也是有点麻烦，又是有github for windows又是有msysgit。</p>
+<p>总之安装好这个Vundle还是花了大力气的，这里就简单的对整个过程做个流水记录，希望能帮到需要的人。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/08/28/note_vim/vn_vg/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/08/28/note_vim/vn_vg/" data-id="irsae2tuiddqqojr" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_vim/snipmate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/08/28/note_vim/snipmate/" class="article-date">
+  <time datetime="2013-08-28T03:17:55.000Z" itemprop="datePublished">Aug 28 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/08/28/note_vim/snipmate/">好插件之snipmate</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="标准好插件">标准好插件</h1>
+<p>之前因为没有搞定neocomplcache，所以neosnippet也就没有动作了。</p>
+<p>但是后来在网上逛来逛去，还是隐隐的觉得还是应该用个snippet插件的，虽然之前没接触过。没用上neosnippet，但是不能否定snippet这种从gif截图功能就能看出牛逼之处的功能。</p>
+<p>snippet的功能其实还是很明显的，不过陌生的东西还是会让人有莫名的感觉。这次我选了个用的人最多的snipmate,据说是移植的TextMate的功能，所以这个功能性还有操作应该都是标准的。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/08/28/note_vim/snipmate/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/08/28/note_vim/snipmate/" data-id="2qy88ojaqqq5kqg6" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/tmp/">用于分立RAM的宏</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

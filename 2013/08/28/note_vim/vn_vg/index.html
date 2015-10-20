@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vundle和git | Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言
+Vundle是现在管理vim插件的主流，但是折腾到现在才装起来。Vundle是基于git的一个插件，github简直是vim插件最完美的一个社区，而且当下基本所有的vim插件项目都托管到github了。
+我觉得Vundle对像我这种初级用户还是有点距离的，原因主要是对git概念的不甚理解。原先git就是Linux下的工具，像我这种Windows用户知道这个名字是通过github这个很火网站，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vundle和git">
+<meta property="og:url" content="http://yoursite.com/2013/08/28/note_vim/vn_vg/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="前言
+Vundle是现在管理vim插件的主流，但是折腾到现在才装起来。Vundle是基于git的一个插件，github简直是vim插件最完美的一个社区，而且当下基本所有的vim插件项目都托管到github了。
+我觉得Vundle对像我这种初级用户还是有点距离的，原因主要是对git概念的不甚理解。原先git就是Linux下的工具，像我这种Windows用户知道这个名字是通过github这个很火网站，">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vundle和git">
+<meta name="twitter:description" content="前言
+Vundle是现在管理vim插件的主流，但是折腾到现在才装起来。Vundle是基于git的一个插件，github简直是vim插件最完美的一个社区，而且当下基本所有的vim插件项目都托管到github了。
+我觉得Vundle对像我这种初级用户还是有点距离的，原因主要是对git概念的不甚理解。原先git就是Linux下的工具，像我这种Windows用户知道这个名字是通过github这个很火网站，">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-note_vim/vn_vg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/08/28/note_vim/vn_vg/" class="article-date">
+  <time datetime="2013-08-28T03:18:05.000Z" itemprop="datePublished">Aug 28 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vundle和git
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言">前言</h2>
+<p>Vundle是现在管理vim插件的主流，但是折腾到现在才装起来。Vundle是基于git的一个插件，github简直是vim插件最完美的一个社区，而且当下基本所有的vim插件项目都托管到github了。</p>
+<p>我觉得Vundle对像我这种初级用户还是有点距离的，原因主要是对git概念的不甚理解。原先git就是Linux下的工具，像我这种Windows用户知道这个名字是通过github这个很火网站，而且很长的时间里面我一直认为git就是指的github，虽然git跟github的关系是非常大的。</p>
+<p>搞清楚git是什么东西花了我很长的时间，然后要用安装使用软件也是有点麻烦，又是有github for windows又是有msysgit。</p>
+<p>总之安装好这个Vundle还是花了大力气的，这里就简单的对整个过程做个流水记录，希望能帮到需要的人。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="过程">过程</h2>
+<ul>
+<li>准备<ul>
+<li>环境：WinXP</li>
+<li>所用工具： mysgit，Vundle(当然是github里面的啦，<em>Shougo/neocomplcache.vim</em>)</li>
+</ul>
+</li>
+<li>git的安装配置，这个我用的是msysgit，因为网上的教程用的都是这个<ul>
+<li>下载，安装这个没什么好说的，安装完成后桌面上出来一个Git Bash的图标，还是一个命令行的工具，果然是geek的可以。</li>
+<li>配置环境变量，不然不能在cmd里面使用git。具体就是把git的安装路径下的bin路径和cmd路径添加到用户变量的PATH字符串里面。然后cmd里面查看版本：git —version就会出现<br><code>git version 1.8.1.msysgit.1</code><br>证明配置成功了。这里要说的是，在Git Bash里面打“git —version”查看版本是可以的，但是还是要把这个路径放入环境变量。</li>
+<li>在git的cmd文件夹下建立curl脚本(curl.cmd)，用于“远程链接”，脚本内容为为：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@rem</span> Do not use <span class="string">"echo off"</span> to not affect any child calls.</div><div class="line"><span class="variable">@setlocal</span></div><div class="line"><span class="variable">@rem</span> Get the abolute path to the <span class="keyword">parent</span> directory, which is assumed to be the</div><div class="line"><span class="variable">@rem</span> Git installation root.</div><div class="line"><span class="variable">@for</span> /F <span class="string">"delims="</span> <span class="variable">%%</span>I <span class="keyword">in</span> (<span class="string">"%~dp0.."</span>) <span class="keyword">do</span></div><div class="line"><span class="variable">@set</span> git_install_root=<span class="variable">%%</span>~fI</div><div class="line"><span class="variable">@set</span> PATH=<span class="variable">%git_install_root</span><span class="variable">%\</span>bin;<span class="variable">%git_install_root</span><span class="variable">%\</span>mingw\bin;<span class="variable">%PATH</span>%</div><div class="line"><span class="variable">@if</span> not exist <span class="string">"%HOME%"</span> </div><div class="line"><span class="variable">@set</span> HOME=<span class="variable">%HOMEDRIVE</span><span class="variable">%%</span>HOMEPATH% </div><div class="line"><span class="variable">@if</span> not exist <span class="string">"%HOME%"</span> </div><div class="line"><span class="variable">@set</span> HOME=<span class="variable">%USERPROFILE</span>% </div><div class="line"><span class="variable">@curl</span>.exe <span class="variable">%*</span></div></pre></td></tr></table></figure>
+
+<p>其实这个东西的意义我是看不懂的，直接照着做。这里要说的是教程有的是说“git的路径放入环境变量”，有的是说“把bin路径和cmd路径都放入环境变量”，而且教程里面没有明说这个curl.cmd是要放在哪个文件夹下面，我没多想，把这个文件放cmd文件假下面了，然后把两个都放进PATH里面去了。操作完之后还是要在cmd里面验证一下curl，输入“curl —version”查看版本，输出<code>curl 7.26.0 (i686-pc-mingw32) libcurl/7.26.0 OpenSSL/0.9.8x zlib/1.2.7</code>那就对了。</p>
+<ul>
+<li><p>Vundle的安装配置</p>
+<ul>
+<li>我发现网上教程说的安装基本都是：<br><code>git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git</code><br>~/.vim后面的路径是稍有不同，搞的我已经会用git了似的。这个其实是Vundle doc里面的setup的第一步，但是像我虽然不懂git，这个路径是linux的路径还是看的出来的。而且根据我非常有限的linux知识，“~/”代表的是HOME目录，说明这个命令行还是在vim里面执行的。唉，但是我这边的vim里面执行不来git命令。所以我只好用土法，去github的gmarik/vundle把zip包下过来，然后在vimfiles文件夹下面创建Bundle文件夹然后把解压后的包拷进去。这里有另外一个奇怪的地方，就是vundle.txt里面的这个命令行路径是，~/.vim/vundle.git但是markdown文档里面的setup给的路径是~/.vim/bundle/vundle，我也管不了这么多了。</li>
+<li><p>然后就是_vimrc文件的配置了：</p>
+<pre><code>  <span class="keyword">set</span> nocompatible
+  <span class="string">" Vundle configs
+</span>  <span class="keyword">filetype</span> off 
+  <span class="string">" set the path of Vundle
+</span>  <span class="keyword">set</span> rtp+=$VIM/vimfiles/bundle/vundle/ 
+  <span class="built_in">call</span> vundle#rc(<span class="string">'$VIM/vimfiles/bundle/'</span>) 
+  <span class="string">""</span><span class="built_in">call</span> vundle#rc() 
+  <span class="string">" set the protocol 'git' instead of 'http'
+</span>  <span class="keyword">let</span> <span class="variable">g:vundle_default_git_proto</span> = <span class="string">'git'</span> 
+  Bundle <span class="string">'gmarik/vundle'</span> 
+  <span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span>
+  <span class="string">" My Bundle list
+</span>  Bundle <span class="string">'taglist.vim'</span> 
+  Bundle <span class="string">'scrooloose/nerdtree'</span>
+  Bundle <span class="string">'Shougo/neocomplcache.vim'</span>   
+</code></pre><p>我是把这些放在_vimrc的最前头了，文档里面一再强调配置前“filetype off”的和配置后的“filetype plugin indent on”，然后保险起见在最后一行又加了一次“filetype plugin indent on”。</p>
+</li>
+</ul>
+</li>
+<li><p>最后就讲讲使用情况</p>
+<ul>
+<li>_vimrc文件里面用“Bundle ‘namelink_of_plugin’”这样的格式来标记需要用Vundle管理的插件，支持3种格式的namelink_of_plugin：github的vimscript主页（也就是vim官方插件）下的比如’taglist.vim’；github的非vimscript主页的插件比如’scrooloose/nerdtree’；还有就是不在github下的插件了，要打完连接全称，这个我估计也用不到了。<ul>
+<li>命令很少，一共也就几条：:BundleList——列出插件；:BundleInstal(!)——安装（更新）插件；:BundleSearch——搜索插件，要带插件名的；:BundleClean——删除插件。</li>
+</ul>
+</li>
+<li>用:BundleList命令会自动打开一个左侧的window，里面是_vimrc里面的Bundle关键字插件。</li>
+<li>:BundleInstal(!)我用的是加了叹号的更新插件操作，这个用了会跳出cmd的窗口，估计就是在cmd里面使用一系列的git命令。这个同样会在vim左侧开出一个window来，有运行状态的跟踪，整个过程完了之后会提示你点<em>l</em>键查看log，蛮不错的。不过在这里是有出了状况了。第一个就是Vundle的更新，会一直失败，然后log里说的大致是”Vundle directory already exists”什么的，我想这可能跟我是用土办法直接拷进去有关系，这个时候我把Vundle这个文件夹删掉了才解决了这个错误。<strong>注意这个时候我是开着vim删文件夹的</strong>，要是关了vim然后删了再重启估计会有问题。我想这个Vundle的这个设置其实有点莫名其妙啊，会不会是个bug。第二个就是taglist这个插件了，会提示”repo does not exist”，搞了半天才醒悟是因为完整的插件名其实是’taglist.vim’。还有要说的是，其实我是已经安装了taglist跟NERDTree的，是直接拷到vimfiles这个文件夹的，然后用了这个命令，Vundle是在vimfiles/Bundle下面把这两个插件重新安装了，然后neocomplcache这个是完全要Vundle安装的。</li>
+<li>:BundleSearch这个真的比较犀利啊，输入字符搜插件。也是打开左侧窗口，然后列出搜索结果，然后会提示你安装啊更新啊清理啊这些后续操作。</li>
+<li>:BundleClean我还没用过，不过我猜测这个的原理可能是比较_vimrc文件里的Bundle项目跟Bundle文件夹，发现_vimrc里面没有的就把Bundle里面的删了。不过Vundle是在Bundle下面为每个插件建立一个独立的目录而不是像我之前的直接把解压的所有东西都丢到vimfiles里面，然后很多插件都会在同一个目录比如plugin、autoload、ftplugin里面混到一起去。我原先要用Vundle就是冲着插件清理的功能来的，我想要是真能把混到一起的文件找出来然后删掉还是很犀利的。Vundle没有让我看到想看到的东西，不过这个设计还是巧妙的。</li>
+</ul>
+</li>
+</ul>
+<h2 id="小总结">小总结</h2>
+<p>总的说来，Vundle是一个好东西，一番折腾之后还是有点快感的。之前比较早的时候，我在网上看到说Vundle可以让_vimrc少很多行，我当时肯定是看错了。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/08/28/note_vim/vn_vg/" data-id="irsae2tuiddqqojr" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/09/01/note_scholar/fastdft/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          电力系统基波向量的快速算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/08/28/note_vim/snipmate/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">好插件之snipmate</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/tmp/">用于分立RAM的宏</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

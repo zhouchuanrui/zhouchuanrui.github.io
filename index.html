@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ignorance is a rare rare blessing~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Central Perk">
+<meta property="og:url" content="http://yoursite.com/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="Ignorance is a rare rare blessing~">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Central Perk">
+<meta name="twitter:description" content="Ignorance is a rare rare blessing~">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-note_others/tmp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/28/note_others/tmp/" class="article-date">
+  <time datetime="2015-08-28T03:16:23.000Z" itemprop="datePublished">Aug 28 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/28/note_others/tmp/">用于分立RAM的宏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>测试一下看看。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/08/28/note_others/tmp/" data-id="mpoq78j2358puhka" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_emacs/writing_verilog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/28/note_emacs/writing_verilog/" class="article-date">
+  <time datetime="2015-01-28T14:54:54.000Z" itemprop="datePublished">Jan 28 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="概述">概述</h1>
+<p>由于工种的特殊性，Verilog可以说是一门朴实到简陋的设计语言，由于语法功能都非常的底层，因此在做规模比较大的设计的时候，Verilog代码必定是密密麻麻、相当繁琐的。</p>
+<p>于是从开始做FPGA开始，我就在不断的探索verilog的编辑方案。使用的编辑器完成了从“IDE自带编辑器—》Notepad++—》Emacs—》Vim”的变迁。</p>
+<p>其实我这么做的还有一个很大的推力，就是IDE自带的编辑器实在太差。我用的是Quartus II，里面的代码编辑器连换行缩进都会出问题，而且语法高亮也太过简陋，还比不上Notepad++这种通用编辑器，简直不像是一个Verilog的IDE，跟VS一比更是不忍直视。不过也要感谢Quartus，让接触学习了Emacs和Vim，并因此顺带学到了很多相关的技巧和思维。</p>
+<p>目前，我使用的这套Verilog编辑环境是以gVim作为主编辑器的，此外还用到了Emacs的verilog-mode和snipmate插件。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2015/01/28/note_emacs/writing_verilog/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/01/28/note_emacs/writing_verilog/" data-id="4d33mckmt2sdce48" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/readmem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/27/note_fpga/readmem/" class="article-date">
+  <time datetime="2014-10-27T13:46:05.000Z" itemprop="datePublished">Oct 27 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>之前在做了一个<a href="https://github.com/zhouchuanrui/brl" target="_blank" rel="external">verilog版的呼吸灯</a>，主要思路是把正弦信号调制到PWM里面循环输出。这个工程目前还处于还处刚刚完成仿真（用的ModelSim）的阶段，其中里面的正弦波数据是这样调用的：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">reg [<span class="number">19</span><span class="symbol">:</span><span class="number">0</span>] mem[<span class="number">199</span><span class="symbol">:</span><span class="number">0</span>];</div><div class="line">initial </div><div class="line"><span class="keyword">begin</span></div><div class="line">	<span class="variable">$readmemh</span> (<span class="string">"sine.dat"</span>, mem);</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+<p>之前需要用到正弦波数据的时候，都是老老实实的用<code>ROM IP+Matlab+mif</code>文件来实现的。这还是我第一次用<code>$readmem</code>，之前只知道这个语句是不可综合的。当时手头没有板子可以用，心想还是快点弄个出来先仿真，于是就用了这个了，数据文件也是直接用Python弄出来的（Python真是好）。</p>
+<p>近来开始换用Vivado了，从A家换到X家，从新开始，很老实的看各种官方User Guide，然后就在机缘巧合之下，突然看到一篇文档里面直接提到说<code>$readmem</code>是可综合的。这个发现让我很震惊，这个带<code>$</code>的语句竟然是可综合的？！然后我又回头翻Quartus的文档，发现原来<code>$readmem</code>在Quartus里面也是可以综合的。思维定势蒙蔽了我的双眼，这个语句要是可综合的那用起来可就方便多了。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/10/27/note_fpga/readmem/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/10/27/note_fpga/readmem/" data-id="oj2fpfkyfohq4fjb" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_python/python2cmd" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/22/note_python/python2cmd/" class="article-date">
+  <time datetime="2014-08-21T23:57:59.000Z" itemprop="datePublished">Aug 22 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="背景">背景</h1>
+<p>我写了一个<a href="https://github.com/zhouchuanrui/PyReName" target="_blank" rel="external">批量文件命名的Python脚本</a>，可以对<strong>脚本所在的路径下的文件重新进行增量式命名</strong>。内容很简单，但是目前只能把脚本复制到需要进行文件重命名的文件夹下面运行，比较麻烦。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/08/22/note_python/python2cmd/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/08/22/note_python/python2cmd/" data-id="z3wv80vle9ho3hs8" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_git/git&amp;dropbox" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/20/note_git/git&dropbox/" class="article-date">
+  <time datetime="2014-01-20T09:10:40.000Z" itemprop="datePublished">Jan 20 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="使用场景">使用场景</h1>
+<p>使用Dropbox和git来管理verilog项目已经有段日子了，总的说来这个方案跟预期的一样非常的好，做为一个git菜鸟来说这一步也算的上是很大的收获。</p>
+<p>现在回想起来，之前是怎么管理verilog项目版本的呢？</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/01/20/note_git/git&dropbox/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/20/note_git/git&dropbox/" data-id="wquflanfa8n0agqa" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/gndbnc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/17/note_fpga/gndbnc/" class="article-date">
+  <time datetime="2014-01-17T03:02:33.000Z" itemprop="datePublished">Jan 17 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/01/17/note_fpga/gndbnc/">FPGA怎么抑制地弹</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="什么是地弹">什么是地弹</h1>
+<p>芯片的管脚与地之间有寄生电感，然后芯片的输出信号切换的时候，流到地端的电流产生突变，这样会在寄生电感上面产生压降。这个就是地弹。</p>
+<p>地弹的大小由两个因素决定，一个就是寄生电感的大小，电感越大地弹就越大；另外一个就是信号切换的频率，信号切换的频率越大地弹的发生的频率也越大，特别是多个管脚信号（就比如数据总线）同时切换的时候这个地弹就很大了。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/01/17/note_fpga/gndbnc/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/17/note_fpga/gndbnc/" data-id="cmzpqjdcipqbkmzt" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/fsm_issue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/16/note_fpga/fsm_issue/" class="article-date">
+  <time datetime="2014-01-16T13:35:01.000Z" itemprop="datePublished">Jan 16 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/01/16/note_fpga/fsm_issue/">状态机要注意异步输入信号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近的项目里写了一个管脚信号滤波的模块，可以设置延迟参数，主要是想用来做一个自制协议的信号解码的前置滤波，里面的主体是这个状态机：</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/01/16/note_fpga/fsm_issue/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/16/note_fpga/fsm_issue/" data-id="upx6vtasuc07anpl" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_vim/manual_note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/14/note_vim/manual_note/" class="article-date">
+  <time datetime="2014-01-14T04:53:09.000Z" itemprop="datePublished">Jan 14 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/01/14/note_vim/manual_note/">Vim笔记【整理】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="模式">模式</h1>
+<p>Vim的模式跟Emacs的模式是完全不同的概念，指的是对每个打开的窗口都有4个模式：</p>
+<ul>
+<li>普通：初始模式，可进行浏览，复制，删除这些操作；</li>
+<li>编辑：用来做文本输入；</li>
+<li>可视：用来进行快速的移动，选择文本；</li>
+<li>命令：退出、保存等操作；</li>
+</ul>
+<p>这个应该是Vim最独特的一点了，正因为有编辑模式之外的模式，所以字母键就可以用来作快捷键，快捷键很是灵活简洁啊。</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/01/14/note_vim/manual_note/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/14/note_vim/manual_note/" data-id="yze5tje6kxm3mngd" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/begin_end" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/11/note_fpga/begin_end/" class="article-date">
+  <time datetime="2014-01-11T13:09:53.000Z" itemprop="datePublished">Jan 11 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/01/11/note_fpga/begin_end/">begin-end还是有用的</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近代码越写越长，感觉begin-end去掉倒也看着清爽许多。有一段这样的代码：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">always @(posedge clk <span class="literal">or</span> negedge rst_n)</div><div class="line">begin</div><div class="line">	<span class="keyword">if</span> (!rst_n)</div><div class="line">		wave &lt;= <span class="escape">`L</span>OW<span class="comment">;</span></div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (en == <span class="escape">`O</span>N)</div><div class="line">		<span class="keyword">if</span> (cnt == pPOS_HIGH)</div><div class="line">			wave &lt;= <span class="escape">`H</span>IGH<span class="comment">;</span></div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (cnt == pos_low)</div><div class="line">			wave &lt;= <span class="escape">`L</span>OW<span class="comment">;</span></div><div class="line">	<span class="keyword">else</span></div><div class="line">		wave &lt;= <span class="escape">`H</span>IGH<span class="comment">;</span></div><div class="line">end</div></pre></td></tr></table></figure>
+
+
+        
+          <p class="article-more-link">
+            <a href="/2014/01/11/note_fpga/begin_end/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/11/note_fpga/begin_end/" data-id="l3ln8yr72gw4hknj" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_fpga/about_modelsim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/04/note_fpga/about_modelsim/" class="article-date">
+  <time datetime="2014-01-04T07:18:32.000Z" itemprop="datePublished">Jan 4 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/01/04/note_fpga/about_modelsim/">ModelSim使用笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="一些让人惊讶的地方">一些让人惊讶的地方</h1>
+<p>可以设断点, 做单步运行调试!!!</p>
+<p>modelsim是跨平台的, 可以在Linux和Unix下用!!!</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2014/01/04/note_fpga/about_modelsim/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/04/note_fpga/about_modelsim/" data-id="bhtxvta9hl1unppe" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/tmp/">用于分立RAM的宏</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
