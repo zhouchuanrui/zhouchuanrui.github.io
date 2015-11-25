@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TCP/IP小笔记 | Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[TOC]
+资料整理自《嵌入式Linux应用程序开发标准教程》.
+参考模型
+OSI(Open System interconnection)模型分为7层: 应用层, 表示层, 会话层, 传输层, 网络层, 数据链路层和物理层. 
+
+这个7层协议模型虽然规定的非常细致和完善, 但在实际中却得不到广泛的应用, 其重要的原因之一就在于它过于复杂. 
+
+TCP/IP模型简化为4层: 应用层, 传输层, 网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP/IP小笔记">
+<meta property="og:url" content="http://yoursite.com/2013/04/02/note_jbh/tcpip/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="[TOC]
+资料整理自《嵌入式Linux应用程序开发标准教程》.
+参考模型
+OSI(Open System interconnection)模型分为7层: 应用层, 表示层, 会话层, 传输层, 网络层, 数据链路层和物理层. 
+
+这个7层协议模型虽然规定的非常细致和完善, 但在实际中却得不到广泛的应用, 其重要的原因之一就在于它过于复杂. 
+
+TCP/IP模型简化为4层: 应用层, 传输层, 网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP/IP小笔记">
+<meta name="twitter:description" content="[TOC]
+资料整理自《嵌入式Linux应用程序开发标准教程》.
+参考模型
+OSI(Open System interconnection)模型分为7层: 应用层, 表示层, 会话层, 传输层, 网络层, 数据链路层和物理层. 
+
+这个7层协议模型虽然规定的非常细致和完善, 但在实际中却得不到广泛的应用, 其重要的原因之一就在于它过于复杂. 
+
+TCP/IP模型简化为4层: 应用层, 传输层, 网">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-note_jbh/tcpip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/04/02/note_jbh/tcpip/" class="article-date">
+  <time datetime="2013-04-02T11:11:26.000Z" itemprop="datePublished">Apr 2 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TCP/IP小笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>资料整理自《嵌入式Linux应用程序开发标准教程》.</p>
+<h1 id="参考模型">参考模型</h1>
+<p>OSI(Open System interconnection)模型分为7层: 应用层, 表示层, 会话层, 传输层, 网络层, 数据链路层和物理层. </p>
+<blockquote>
+<p>这个7层协议模型虽然规定的非常细致和完善, 但在实际中却得不到广泛的应用, 其重要的原因之一就在于它过于复杂. </p>
+</blockquote>
+<p>TCP/IP模型简化为4层: 应用层, 传输层, 网络层和网络接口层.</p>
+<a id="more"></a>
+
+<h1 id="协议族">协议族</h1>
+<p>列一下个层次上的重要协议:</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>telnet, ftp</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>TCP, UDP</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>ICMP, IGMP, IPv4, IPv6</td>
+</tr>
+<tr>
+<td>网络接口层</td>
+<td>ARP, RARP, MPLS</td>
+</tr>
+</tbody>
+</table>
+<p>再解释下几个协议:</p>
+<ul>
+<li>ARP: 用于获得同一物理网络中的硬件主机地址.</li>
+<li>MPLS: 多协议标签协议, 是很有发展前景的下一代网络协议~~~汗…</li>
+<li>IP: 负责在主机和网络之间寻址和路由数据包.</li>
+<li>ICMP: 用于发送有关数据包的传送错误的协议, ping.exe用的就是这个协议.</li>
+<li>IGMP: 被IP主机用来向本地多路广播路由器报告主机组成员的协议.</li>
+<li>TCP: 为应用程序提供可靠的通信连接, 适合于一次传送大批量数据的情况. 并适用于要求得到响应的应用程序.</li>
+<li>UDP: 提供了无连接通信, 且不对传送包进行可靠性保证. 适合于一次传输少量数据, 可靠性则由应用层来负责.</li>
+</ul>
+<p>QQ的登录用的是TCP, 发送消息用的是UDP.</p>
+<h1 id="TCP和UDP">TCP和UDP</h1>
+<h2 id="TCP和三次握手">TCP和三次握手</h2>
+<blockquote>
+<p>通常应用程序通过打开一个socket来使用TCP服务, TCP管理到其他socket的数据传输. 可以说, 通过IP的源/目的可以唯一的区分网络中两个设备的连接, 通过socket的源/目的可以唯一的区分网络中两个应用程序的连接.</p>
+<p>TCP对话通过三次握手来进行初始化. 三次握手的目的是使数据段的发送和接收同步, 告诉其他主机其一次可接收的数据量, 并建立连接.</p>
+</blockquote>
+<p>这个过程是:</p>
+<ol>
+<li>客户端向服务器发送一个包含SYN(J)同步标志位的数据段发送会话请求.</li>
+<li>服务器成功接收到发来的数据包后, 发送包含ACK(J+1)应答标志位, SYN(K)同步标志位还有即将发送的数据段的起始字节顺序号, 将收到的下一个数据段的字节顺序号的这样一个数据段.</li>
+<li>客户端成功接收到发来的数据包后, 发送包含ACK(K+1)应答标志位, 确认循序号和确认号的数据段.</li>
+</ol>
+<h2 id="UDP">UDP</h2>
+<blockquote>
+<p>UDP即用户数据报协议, 它是一种无连接协议, 因此不需要像TCP那样通过三次握手来建立一个连接. 同时, 一个UDP应用可以同时作为应用的客户端和服务器端. 由于UDP协议并不需要建立一个明确的连接, 因此建立在UDP上的应用要比建立在TCP上的应用简单很多. UDP比TCP协议更加高效, 也能更好的解决实时性的问题. </p>
+</blockquote>
+<h1 id="端口">端口</h1>
+<p>TCP/IP协议中的端口, 端口号为0~65535. 端口有多种分类标准, 这里介绍两种常见的分类.</p>
+<ol>
+<li>按端口号分布<ul>
+<li>0~1023, 知名端口, 这些端口号一般固定的分配给一些服务. 比如21端口分配给FTP服务, 25端口分配给SMTP, 80端口分配给HTTP, 135端口分配给RPC.</li>
+<li>1024~65535, 动态端口, 这些端口号一般不固定分配给某个服务, 只要运行的程序向系统提出访问网络的申请, 系统就可以从这些端口号中分配一个供给该程序使用.</li>
+</ul>
+</li>
+<li>按协议类型划分, 可以分为TCP端口, UDP端口, IP端口和ICMP端口等.<ul>
+<li>TCP端口, 即传输控制端口, 需要在客户端和服务器之间建立连接, 有FTP(21), Telnet(23), SMTP(25)和HTTP(80)等.</li>
+<li>UDP端口, 即用户数据包协议端口, 无需在客户端和服务器之间建立连接. 常见的有DNS(53), SNMP(161)和QQ(8000, 4000)等.</li>
+</ul>
+</li>
+</ol>
+<p>常见的端口有0, 1, 7, 21, 22, 23, 53, 67, 68, 69, 79, 80, 99等, 这些都是什么呢?</p>
+<h1 id="socket编程">socket编程</h1>
+<blockquote>
+<p>在Linux中的网络编程是通过socket接口来进行的. 人们常说的socket是一种特殊的I/O接口, 它也是一种文件描述符. socket是一种常用的进程之间通信机制, 通过它不仅可以实现本地机器上的进程之间的通信, 而且可以通过网络在不同的机器的进程之间通信.<br>每一个socket都用一个半相关描述{协议, 本地地址, 本地端口}; 一个完整的套接字则用一个相关描述{协议, 本地地址, 本地端口, 远程地址, 远程端口}来表示. socket也有一个类似于打开文件的函数调用, 该函数返回一个整型的socket描述符, 随后的连接建立, 数据传输等操作都是通过socket来实现的.</p>
+</blockquote>
+<h2 id="socket类型">socket类型</h2>
+<p>常见的socket有三种类型:</p>
+<ol>
+<li>流式(SOCK_STREAM): 使用TCP协议, 提供可靠的, 面向连接的通信流.</li>
+<li>数据报(SOCK_DGRAM): 使用UDP协议.</li>
+<li>原始socket: 允许对底层的协议(IP, ICMP等)进行直接访问, 主要用于协议的开发.</li>
+</ol>
+<p>项目里使用的是SOCK_STREAM类型的socket.</p>
+<h2 id="函数">函数</h2>
+<p>来说一下一些基本函数:</p>
+<ul>
+<li><code>int socket(int family, int type, int protocol)</code><br>用于建立socket连接, 可指定socket和协议组等信息, 返回一个非负的socket描述符.在建立了socket连接之后, 可对sockaddr或sockaddr_in结构进行初始化, 以保存建立的socket地址信息.</li>
+<li><code>int bind(int sockfd, struct sockaddr *my_addr, int addrlen)</code><br>用于将本地IP绑定到端口号, 主要用于TCP连接, 而在UDP中则不需要.</li>
+<li><code>int listen(int sockfd, int backlog)</code><br>在<strong>服务器</strong>端建立套接字并绑定地址后, 需要准备在该套接字上接收新的连接请求. 这时通过调用listen()来创建一个等待队列, 在其中存放未处理的客户端连接请求.</li>
+<li><code>int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)</code><br><strong>服务器</strong>端创建完等待队列之后, 调用这个函数来等待并接收客户端连接请求.</li>
+<li><code>int connect(int sockfd, struct sockaddr *serv_addr, int addrlen)</code><br>在TCP中用于bind()之后的<strong>客户端</strong>, 用于与服务器端建立连接. 在UDP中由于没有用bind()函数, 这个函数兼有bind()函数的作用.</li>
+<li><code>int send(int sockfd, const void *msg, int len, int flags)</code><br><code>int recv(int sockfd, void *buf, int len, unsigned int flags)</code><br>用于收发数据.</li>
+<li><code>int sendto(int sockfd, const void *msg, int len, unsigned int flags, const struct sockaddr *to, int tolen)</code><br><code>int recvfrom(int sockfd, void *buf, int len, unsigned int flags, struct sockaddr *from, int *fromlen)</code><br>在TCP中, 这俩函数作用与上面的俩函数作用相同. 在UDP中, 可以用在没有执行connect()函数的情况下, 自动寻找指定地址并进行连接.</li>
+</ul>
+<p>上面讲的这些有收发行为的函数(即除了socket(), bind()外)都是阻塞性质的, 要处理多路复用的话就要用fcntl()函数和select()函数.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/04/02/note_jbh/tcpip/" data-id="ecf5cdwdi5sibf02" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/04/03/note_fpga/q_verilog_template/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          无意中发现Quartus ii 里面的verilog template
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/04/01/note_jbh/static_const/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">static和const小笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

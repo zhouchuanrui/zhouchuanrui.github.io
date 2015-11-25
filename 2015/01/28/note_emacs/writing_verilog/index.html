@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我的Verilog HDL代码快速编辑坏境 | Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[TOC]
+概述
+由于工种的特殊性，Verilog可以说是一门朴实到简陋的设计语言，由于语法功能都非常的底层，因此在做规模比较大的设计的时候，Verilog代码必定是密密麻麻、相当繁琐的。
+于是从开始做FPGA开始，我就在不断的探索verilog的编辑方案。使用的编辑器完成了从“IDE自带编辑器—》Notepad++—》Emacs—》Vim”的变迁。
+其实我这么做的还有一个很大的推力，就是IDE自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的Verilog HDL代码快速编辑坏境">
+<meta property="og:url" content="http://yoursite.com/2015/01/28/note_emacs/writing_verilog/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="[TOC]
+概述
+由于工种的特殊性，Verilog可以说是一门朴实到简陋的设计语言，由于语法功能都非常的底层，因此在做规模比较大的设计的时候，Verilog代码必定是密密麻麻、相当繁琐的。
+于是从开始做FPGA开始，我就在不断的探索verilog的编辑方案。使用的编辑器完成了从“IDE自带编辑器—》Notepad++—》Emacs—》Vim”的变迁。
+其实我这么做的还有一个很大的推力，就是IDE自">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的Verilog HDL代码快速编辑坏境">
+<meta name="twitter:description" content="[TOC]
+概述
+由于工种的特殊性，Verilog可以说是一门朴实到简陋的设计语言，由于语法功能都非常的底层，因此在做规模比较大的设计的时候，Verilog代码必定是密密麻麻、相当繁琐的。
+于是从开始做FPGA开始，我就在不断的探索verilog的编辑方案。使用的编辑器完成了从“IDE自带编辑器—》Notepad++—》Emacs—》Vim”的变迁。
+其实我这么做的还有一个很大的推力，就是IDE自">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-note_emacs/writing_verilog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/28/note_emacs/writing_verilog/" class="article-date">
+  <time datetime="2015-01-28T14:54:54.000Z" itemprop="datePublished">Jan 28 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      我的Verilog HDL代码快速编辑坏境
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="概述">概述</h1>
+<p>由于工种的特殊性，Verilog可以说是一门朴实到简陋的设计语言，由于语法功能都非常的底层，因此在做规模比较大的设计的时候，Verilog代码必定是密密麻麻、相当繁琐的。</p>
+<p>于是从开始做FPGA开始，我就在不断的探索verilog的编辑方案。使用的编辑器完成了从“IDE自带编辑器—》Notepad++—》Emacs—》Vim”的变迁。</p>
+<p>其实我这么做的还有一个很大的推力，就是IDE自带的编辑器实在太差。我用的是Quartus II，里面的代码编辑器连换行缩进都会出问题，而且语法高亮也太过简陋，还比不上Notepad++这种通用编辑器，简直不像是一个Verilog的IDE，跟VS一比更是不忍直视。不过也要感谢Quartus，让接触学习了Emacs和Vim，并因此顺带学到了很多相关的技巧和思维。</p>
+<p>目前，我使用的这套Verilog编辑环境是以gVim作为主编辑器的，此外还用到了Emacs的verilog-mode和snipmate插件。</p>
+<a id="more"></a>
+
+<h1 id="verilog-mode">verilog-mode</h1>
+<p>虽然现在使用的主编辑器是gVim，但是可以说这套编辑环境里面的功能核心还是verilog-mode。verilog-mode是Emacs下的一个major-mode，作为一个verilog代码插件，能够被Emacs默认收录，可见verilog-mode的功能强大。</p>
+<p>verilog-mode的精华是AUTO-COMMAND宏，在代码里面写下<code>/*auto&lt;command&gt;*/</code>格式的AUTO-COMMAND“种子”，之后按AUTO-COMMAND展开快捷键<code>C-c C-a</code>，verilog-mode就会为你展开相应的自动化宏。这些宏一般是用来完成信号的声明，比如用于自动完成端口列表的<code>/*AUTOARG*/</code>：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="inheritance">&lt;<span class="parent">name_of_module</span></span>&gt;</span></div><div class="line">(<span class="regexp">/*AUTOARG*/</span>);</div></pre></td></tr></table></figure>
+
+<p>按这个格式写，执行<code>C-c C-a</code>之后，verilog-mode会读取模块之中的用<code>input</code>和<code>output</code>定义的信号，然后添加到模块端口列表的括号里。还有用于自动产生例化模块信号的/<em>AUTOINST</em>/：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="input"><span class="prompt">&lt;name_of_module&gt;</span> &lt;inst_of_module&gt;</span></div><div class="line">(<span class="regexp">/*AUTOINST*/</span>)<span class="symbol">:</span></div></pre></td></tr></table></figure>
+
+<p>执行<code>C-c C-a</code>之后，verilog-mode会根据例化模块的端口列表，自动添加<code>.&lt;sig&gt; (&lt;sig&gt;)</code>格式的同名例化信号列表，然后你只需要修改括号里面的信号名就可以了，非常的方便。如果你的模块是带全局参数的，可以使用<code>/*AUTOINSTPARAM*/</code>，然后参数也自动展开了。</p>
+<p>我最常用的基本就是这三个宏，此外还有很多功能不同的宏啦：<code>/*AUTOSENSE*/</code>可以把组合逻辑的<code>always</code>块里的敏感信号都添加到敏感列表里；<code>/*AUTORESET*/</code>可以自动展开信号的复位（也就是置零），可以放在带复位信号的<code>always</code>块里配合使用；<code>/*AUTOWIRE*/</code>和<code>/*AUTOREG*/</code>可以用来检查例化后没有定义的信号。</p>
+<p>除了这些之外，verilog-mode还带有格式化文件注释头、交互式状态机和语法元素snippet等功能，可以说是非常的完备。总之，最初接触使用的时候简直是让我叹为观止——一个编辑器竟然可以智能到这种程度。Vim下有仿verilog-mode实现AUTO-COMMAND宏的插件，甚至有一个韩国人写的插件是直接调用系统里的Emacs然后执行verilog-mode下的auto-complete。说起来Emacs的社区活跃程度跟Vim比起来差距应该是越来越大了，但是Emacs的插件质量还是有点让Vim望尘莫及的意思啊。这些verilog-mode插件用起来我估摸着就跟Emacs的viper-mode是一个意思，于是我就还是继续用Emacs来完成<code>C-c C-a</code>,还是留着Emacs。</p>
+<p>PS：在Windows下，把Emacs的安装路径（比如”/E/Emacs24/bin”）添加在环境变量path里面，就可以在gVim里面用<code>:!emacs</code>快速调用Emacs了。一个更快的操作是：</p>
+<pre><code><span class="input"><span class="prompt">:!emacs --batch &lt;filename.v&gt;</span> -f verilog-batch-auto</span>
+</code></pre><h1 id="IEEE_1364-2001">IEEE 1364-2001</h1>
+<p>IEEE 1364-2001就是所谓的verilog-2001了，其实verilog的官方标准不只是有1995跟2001两个而已，但是2001提出了很多语法特性上的改进，因此厂家就取出了这两个最有代表性的标准来作为verilog-1995跟verilog-2001。</p>
+<p>为什么要把这个语法标准提出来呢？也正是因为2001标准提出的语法改进对整个verilog的面貌有了很大的提升，严格的verilog-2001代码实在是比verilog-1995简洁许多，这也是Verilog代码快速编辑的一个因素。比如，在verilog-1995里面完整的端口信号定义是很复杂的：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module mod_emp</div><div class="line">(clk, rst, d, q, <span class="keyword">...</span>);</div><div class="line">	input clk, rst；</div><div class="line">	input d;</div><div class="line">	output q;</div><div class="line">	<span class="keyword">...</span></div><div class="line">	wire clk, rst;</div><div class="line">	wire d;</div><div class="line">	reg q;</div><div class="line"></div><div class="line">	<span class="keyword">...</span></div><div class="line">endmodule</div></pre></td></tr></table></figure>
+
+<p>这些，到了verilog-2001里面就大变样了：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">module mod_emp</div><div class="line">(	</div><div class="line">	input wire clk, rst,</div><div class="line">	input wire d,</div><div class="line">	output reg q,</div><div class="line">	<span class="keyword">...</span></div><div class="line">);</div><div class="line">	<span class="keyword">...</span></div><div class="line">endmodule</div></pre></td></tr></table></figure>
+
+<p>信号定义直接合并在module端口列表里了，回头再看看verilog-1995的这种设定是不是觉得有点二百五呢？（这么一改进甚至连verilog-mode里的<code>/*AUTOARG*/</code>宏都可以省了，不过用verilog-2001写出来的module在verilog-mode里用<code>/*AUTOINST*/</code>宏自动例化的时候是完全没问题的，看来verilog-mode开发人员果然是与时俱进的，这点国内的那些Verilog教材作者就要好好反省了。）再比如，verilog-2001里面写组合逻辑<code>always</code>块的时候，可以直接写成：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">always @(*)</div><div class="line">	<span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>这样也替代了verilog-mode里的<code>/*AUTOSENSE*/</code>宏。</p>
+<p>其他的内容这里也就不再赘述了，其实我也就对这两点比较熟悉，但是就这两点而言就已经能让你的verilog代码变的清爽很多了，因此verilog-2001还是肯定是要好好研读的。</p>
+<h1 id="Snippet">Snippet</h1>
+<p>Snippet代码块,是指一些代码格式化结构，可以快速的写出if-else、while、函数定义等结构，是写代码——不只是verilog——的利器。这个其实Emacs里面的verilog-mode已经带了不少了。我在gVim里面使用的是snipmate这个插件，具体的介绍看<a href="http://zhouchuanrui.github.io/2013/08/28/note_vim/snipmate/" target="_blank" rel="external">这一篇</a>吧。</p>
+<p>snipmate的一个好处是可以很方便的按照语法规则自定义Snippet，每个人都会有自己的编码习惯，因此自己写出来的Snippet自然才是最适合自己的。我写的<a href="https://github.com/zhouchuanrui/mySnippet/blob/master/verilog.snippets" target="_blank" rel="external">跟verilog-mode匹配的snippet</a>，里面自然就是带了AUTO-COMMAND的，然后还有文件头、格式化状态机等从verilog-mode里借鉴的一些结构。</p>
+<p>平心而论，Snippet用的顺手了，可以让你写代码的速度大大提升而且降低低级错误出现的概率，这样就能把注意力更多的放在思路的实现上了。</p>
+<h1 id="其他">其他</h1>
+<p>到这里为止，其实已经可以算是完结了。但是还是有点奇淫巧技要分享下，说不定能带来额外的启发。</p>
+<p>如果你电脑里面有Python，拿Windows下的Python 3.x来说好了，Vim里面有一个很强大的隐藏功能。在你的Vim里面输入下面的Python代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">	<span class="keyword">print</span> (<span class="string">"reg"</span> + str(i) + <span class="string">" = 8'hff"</span>)</div></pre></td></tr></table></figure>
+
+<p>然后用可视行模式（大V）选中这两行，然后进入命令模式，输入:</p>
+<pre><code><span class="string">'&lt;,'</span>&gt;!python.<span class="keyword">exe</span> 
+</code></pre><p>然后上面的代码就执行了，输出是这样的：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">reg0 = <span class="number">8</span>'hff</div><div class="line">reg1 = <span class="number">8</span>'hff</div><div class="line">reg2 = <span class="number">8</span>'hff</div><div class="line">reg3 = <span class="number">8</span>'hff</div><div class="line">reg4 = <span class="number">8</span>'hff</div><div class="line">reg5 = <span class="number">8</span>'hff</div><div class="line">reg6 = <span class="number">8</span>'hff</div><div class="line">reg7 = <span class="number">8</span>'hff</div><div class="line">reg8 = <span class="number">8</span>'hff</div><div class="line">reg9 = <span class="number">8</span>'hff</div></pre></td></tr></table></figure>
+
+<p>注意这个代码不是.py文件而是.v文件，实际上在任何文本文件里面都是可以执行的。其实Perl、Ruby、Lua这些<strong>可以在shell/CMD里面执行的解释器</strong>还有shell/CMD命令也可以。比如文件里面的一行写上<code>dir</code>这个CMD下的命令，然后可视模式选中，然后用</p>
+<pre><code><span class="comment">'<span class="xmlDocTag">&lt;,'&gt;</span>!cmd</span>
+</code></pre><p>执行，就输出了：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Microsoft Windows XP <span class="special">[</span>版本 5.1.2600<span class="special">]</span></div><div class="line">(C) 版权所有 1985-2001 Microsoft Corp.</div><div class="line"></div><div class="line">F:<span class="command">\hexo</span><span class="command">\source</span><span class="command">\_</span>posts<span class="command">\note</span>_emacs&gt;dir</div><div class="line"> 驱动器 F 中的卷是 Files</div><div class="line"> 卷的序列号是 5E22-CA2E</div><div class="line"></div><div class="line"> F:<span class="command">\hexo</span><span class="command">\source</span><span class="command">\_</span>posts<span class="command">\note</span>_emacs 的目录</div><div class="line"></div><div class="line">2015-01-09  23:18    &lt;DIR&gt;          .</div><div class="line">2015-01-09  23:18    &lt;DIR&gt;          ..</div><div class="line">2014-10-12  18:02             3,312 keyswitch.markdown</div><div class="line">2014-10-12  18:02             4,340 many_languages.markdown</div><div class="line">2014-10-12  18:03             4,559 regex.markdown</div><div class="line">2015-01-25  23:24             7,577 writing_verilog.markdown</div><div class="line">               4 个文件         19,788 字节</div><div class="line">               2 个目录 31,343,042,560 可用字节</div><div class="line"></div><div class="line">F:<span class="command">\hexo</span><span class="command">\source</span><span class="command">\_</span>posts<span class="command">\note</span>_emacs&gt;</div></pre></td></tr></table></figure>
+
+<p>这个功能真是屌，只是我还不知道要怎么用好，在这里抛砖引玉一下，希望能激发到大家的灵感。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/01/28/note_emacs/writing_verilog/" data-id="nfpxptj4oljdq57y" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/28/note_others/perl_notes_on_learning_perl/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《Learning PERL》笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/27/note_fpga/readmem/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">$readmem是可综合的</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

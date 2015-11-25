@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>状态机要注意异步输入信号 | Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近的项目里写了一个管脚信号滤波的模块，可以设置延迟参数，主要是想用来做一个自制协议的信号解码的前置滤波，里面的主体是这个状态机：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="状态机要注意异步输入信号">
+<meta property="og:url" content="http://yoursite.com/2014/01/16/note_fpga/fsm_issue/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="最近的项目里写了一个管脚信号滤波的模块，可以设置延迟参数，主要是想用来做一个自制协议的信号解码的前置滤波，里面的主体是这个状态机：">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="状态机要注意异步输入信号">
+<meta name="twitter:description" content="最近的项目里写了一个管脚信号滤波的模块，可以设置延迟参数，主要是想用来做一个自制协议的信号解码的前置滤波，里面的主体是这个状态机：">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-note_fpga/fsm_issue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/16/note_fpga/fsm_issue/" class="article-date">
+  <time datetime="2014-01-16T13:35:01.000Z" itemprop="datePublished">Jan 16 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      状态机要注意异步输入信号
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近的项目里写了一个管脚信号滤波的模块，可以设置延迟参数，主要是想用来做一个自制协议的信号解码的前置滤波，里面的主体是这个状态机：</p>
+<a id="more"></a>
+
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">(* <span class="variable">syn_encoding =</span> <span class="string">"safe"</span> *)reg [<span class="number">3</span>:<span class="number">0</span>] ns_sig, cs_sig;</div><div class="line">//state parameters</div><div class="line">localparam </div><div class="line">    <span class="variable">sLOW    =</span> <span class="number">4</span>'b0001,</div><div class="line">    <span class="variable">sTO_HIGH    =</span> <span class="number">4</span>'b0010,</div><div class="line">    <span class="variable">sHIGH   =</span> <span class="number">4</span>'b0100,</div><div class="line">    <span class="variable">sTO_LOW =</span> <span class="number">4</span>'b1000;</div><div class="line"></div><div class="line">always @(posedge clk <span class="constant">or</span> negedge rst_n)</div><div class="line">    <span class="keyword">if</span> (!rst_n)</div><div class="line">        cs_sig &lt;= sLOW;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        cs_sig &lt;= ns_sig;</div><div class="line"></div><div class="line">always @(*)</div><div class="line">begin</div><div class="line">    <span class="variable">ns_sig =</span> cs_sig;</div><div class="line">    case (cs_sig)</div><div class="line">        sLOW:</div><div class="line">            <span class="keyword">if</span> (<span class="variable">sig =</span>= `HIGH)</div><div class="line">                <span class="variable">ns_sig =</span> sTO_HIGH;</div><div class="line">        sTO_HIGH:</div><div class="line">            <span class="keyword">if</span> (<span class="variable">valid_HIGH =</span>= `ON)</div><div class="line">                <span class="variable">ns_sig =</span> sHIGH;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">sig =</span>= `OFF)</div><div class="line">                <span class="variable">ns_sig =</span> sLOW;</div><div class="line">        sHIGH:</div><div class="line">            <span class="keyword">if</span> (<span class="variable">sig =</span>= `OFF)</div><div class="line">                <span class="variable">ns_sig =</span> sTO_LOW;</div><div class="line">        sTO_LOW:</div><div class="line">            <span class="keyword">if</span> (<span class="variable">valid_LOW =</span>= `ON)</div><div class="line">                <span class="variable">ns_sig =</span> sLOW;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">sig =</span>= `ON)</div><div class="line">                <span class="variable">ns_sig =</span> sHIGH;</div><div class="line">        default:</div><div class="line">            <span class="variable">ns_sig =</span> sLOW;</div><div class="line">    endcase</div><div class="line">end</div></pre></td></tr></table></figure>
+
+<p>用的是标准学院派写法，还用了<code>safe</code>这个状态机编码<code>synthesis attribute</code>。想来必然是万无一失的。</p>
+<p>但是这个运行的时候总是时不时的出错，像是我在一个工程里设置了高低电平滤波时长为200个<code>clk</code>，在板子上调试的时候出错了，在输出信号下降沿的时候输出直接也下降了，并没有延迟200个时钟，设计的功能也就失效了。</p>
+<p>然后我就用SignalTap抓信号调试，后来发现是状态机这里会出错。SignalTap里可以直接显示状态机的参数名称，<code>sLOW, sTO_HIGH, sHIGH, sTO_LOW</code>，然后我在抓下降沿的时候看到了一个其他的数字编码，后面跟着的是sLOW这个状态。这显然是跳转到其他状态引起状态机复位了。</p>
+<p>但是这个现象我不理解，因为这完全是正常的输入，抓耳挠腮想不出原因来。这个<code>safe</code>状态编码一点也不safe嘛。我就去<a href="http://stackoverflow.com/questions/21085315/when-would-a-verilog-state-machine-go-wrong" target="_blank" rel="external">stackoverflow上提问</a>。</p>
+<p>在等答案的时候我灵光一现，试着把状态机编码改成2位的格雷码，然后把<code>syn_encoding</code>改成了<code>user</code>，结果一编译运行，竟然对了。</p>
+<p>这个时候我还是很激动的，然后回来一看stackoverflow上的问题已经有了个答案了，答题是个分很高的牛逼老兄，跟我说的亚稳态的事情。我一想觉得很有道理啊，这个<code>sig</code>输入直接接到状态机的前级，只是没想到直接让状态机复位了。</p>
+<p>这个时候我突然想起之前有一个板子上，用一个相似的状态机写了一个抓取写时序操作的模块，这个运行的时候直接是整个FPGA都复位了，当时的直觉是这块板子的硬件方面有问题，实际上这个板子的确有很多问题，但是这个FPGA复位恐怕是这个输出亚稳态引起的。</p>
+<p>原来这个东西会有这么大的影响。</p>
+<p>照这个情况来看，格雷码自然是有效的，不过还不是根本方法。照这个老兄的意思，我是应该在<code>sig</code>和状态机之间再插一个触发器才行。</p>
+<p>然后我就做了这个测试，加了一个触发器一运行，果然是没问题的。最后我的终极版本是“状态机格雷码编码+前级同步触发器”：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//--IMPORTANT to deal with the physical ports</span></div><div class="line"><span class="comment">//--add an FF between sig and state-machine</span></div><div class="line">reg sig_r;</div><div class="line">always @(posedge clk)</div><div class="line"><span class="keyword">begin</span></div><div class="line">	sig_r &lt;= sig;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">//state reg</span></div><div class="line"><span class="comment">(* syn_encoding = "user" *)</span>reg [<span class="number">1</span>:<span class="number">0</span>] ns_sig, cs_sig;</div><div class="line"><span class="comment">//state parameters</span></div><div class="line">localparam </div><div class="line">	sLOW	= <span class="number">2</span><span class="string">'b00,</span></div><div class="line">	sTO_HIGH	= 2'b01,</div><div class="line">	sHIGH	= <span class="number">2</span><span class="string">'b11,</span></div><div class="line">	sTO_LOW	= 2'b10;</div></pre></td></tr></table></figure>
+
+<hr>
+<p>这次经历获得的教训：</p>
+<ul>
+<li>不要对状态机太自信，状态机的正确运行跟其他模块其实没差别。</li>
+<li>状态机一旦运行错误，破坏性无法估量。</li>
+<li>学院派状态机的前级是组合逻辑，要特别注意对异步输出信号的处理，这个是以前不曾想到的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2014/01/16/note_fpga/fsm_issue/" data-id="ev9uqtahx826k2lr" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/01/17/note_fpga/gndbnc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          FPGA怎么抑制地弹
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/01/14/note_vim/manual_note/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vim笔记【整理】</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/08/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑坏境</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
+          </li>
+        
+          <li>
+            <a href="/2014/01/20/note_git/git&dropbox/">利用云盘做私人git中心库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
