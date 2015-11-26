@@ -128,11 +128,14 @@ qw表示quoted words：
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">qw(fred barney betty wilma dino)</span></div><div class="line"><span class="comment"># equals ("fred", "barney", "betty", "wilma", "dino")</span></div></pre></td></tr></table></figure>
 
 <p>此外, 用了qw就不限于用括号序对了, 可以用的序对符有:</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">qw</span>!...!</div><div class="line"><span class="keyword">qw</span>/.../</div><div class="line"><span class="keyword">qw</span><span class="comment">#...#</span></div><div class="line"><span class="string">qw{...}</span></div><div class="line"><span class="string">qw[...]</span></div><div class="line"><span class="string">qw&lt;...&gt;</span></div><div class="line">...</div><div class="line"></div><div class="line">&lt;!--more--&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">qw</span>!...!</div><div class="line"><span class="keyword">qw</span>/.../</div><div class="line"><span class="keyword">qw</span><span class="comment">#...#</span></div><div class="line"><span class="string">qw{...}</span></div><div class="line"><span class="string">qw[...]</span></div><div class="line"><span class="string">qw&lt;...&gt;</span></div><div class="line">...</div></pre></td></tr></table></figure>
 
 <p>好灵活的。</p>
 <h2 id="a-b递增数字序列">a..b递增数字序列</h2>
 <p>生成<code>(a, a+1, a+2,..., b-1, b)</code>,这里当然b是要大于a的. 测试了一下, a大于b的话返回的是一个空列表.</p>
+<a id="more"></a>
+
+
 <h2 id="字符串插值">字符串插值</h2>
 <p><code>&quot;@array&quot;</code>与<code>&#39;@array&#39;</code>是不同的, 前者会进行列表值的插入展开, 而后者则是原始的literal字符串不进行展开.</p>
 <p>插值的形式不止于此, 比如<code>&quot;\Lstr&quot;</code>会将<code>str</code>全都变成小写, 相应的<code>&quot;\Ustr&quot;</code>会将字符串全都变成大写字母.</p>
