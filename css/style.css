@@ -294,6 +294,11 @@ body {
   font-size: 1em;
   color: #999;
 }
+.article-entry p,
+.widget p {
+  font-size: 1.5em;
+  color: #999;
+}
 .article-entry hr,
 .widget hr {
   border: 1px dashed #ddd;
