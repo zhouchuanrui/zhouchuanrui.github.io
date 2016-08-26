@@ -224,9 +224,8 @@ body {
 .widget h5,
 .article-entry h6,
 .widget h6 {
-  font-weight: bold;
   color: #000;
-  font-family: font-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 .article-entry h1 a,
 .widget h1 a,
