@@ -271,28 +271,27 @@ body {
 }
 .article-entry h1,
 .widget h1 {
-  font-size: 2em;
+  font-size: 2.2em;
 }
 .article-entry h2,
 .widget h2 {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 .article-entry h3,
 .widget h3 {
-  font-size: 1.3em;
+  font-size: 2em;
 }
 .article-entry h4,
 .widget h4 {
-  font-size: 1.2em;
+  font-size: 2em;
 }
 .article-entry h5,
 .widget h5 {
-  font-size: 1em;
+  font-size: 2em;
 }
 .article-entry h6,
 .widget h6 {
-  font-size: 1em;
-  color: #999;
+  font-size: 2em;
 }
 .article-entry p,
 .widget p {
@@ -716,7 +715,7 @@ a.article-title:hover {
   padding: 10px 0;
 }
 .article-entry blockquote {
-  font-family: font-serif;
+  font-family: "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   margin: 1.2em 0;
   padding: 0 0.8em;
   border-left: 4px solid #ddd;
