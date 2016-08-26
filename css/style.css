@@ -226,7 +226,7 @@ body {
 .widget h6 {
   font-weight: bold;
   color: #000;
-  font-family: "Droid Serif", Georgia, Serif;
+  font-family: font-serif;
 }
 .article-entry h1 a,
 .widget h1 a,
@@ -712,7 +712,7 @@ a.article-title:hover {
   padding: 10px 0;
 }
 .article-entry blockquote {
-  font-family: "Droid Serif", Georgia, Serif;
+  font-family: font-serif;
   margin: 1.2em 0;
   padding: 0 0.8em;
   border-left: 4px solid #ddd;
