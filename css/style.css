@@ -125,7 +125,7 @@ body,
 }
 body {
   background: #eee;
-  font: 16px/1.2em "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font: 14px/1.2em "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
@@ -256,19 +256,6 @@ body {
 .widget h6 a:hover {
   color: #00ceff;
 }
-.article-entry h2,
-.widget h2,
-.article-entry h3,
-.widget h3,
-.article-entry h4,
-.widget h4,
-.article-entry h5,
-.widget h5,
-.article-entry h6,
-.widget h6 {
-  font-weight: 600;
-  margin-bottom: 10px;
-}
 .article-entry h1,
 .widget h1 {
   font-size: 2.2em;
@@ -279,24 +266,24 @@ body {
 }
 .article-entry h3,
 .widget h3 {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .article-entry h4,
 .widget h4 {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .article-entry h5,
 .widget h5 {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .article-entry h6,
 .widget h6 {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .article-entry p,
 .widget p {
-  font-size: 1.5em;
-  color: #999;
+  font-size: 1.4em;
+  color: #555;
 }
 .article-entry hr,
 .widget hr {
@@ -347,6 +334,8 @@ body {
 .widget dl {
   margin: 0 20px;
   line-height: 1.2em;
+  font-size: 1.4em;
+  color: #555;
 }
 .article-entry ul ul,
 .widget ul ul,
@@ -484,9 +473,9 @@ body {
 .nav-icon {
   font-family: FontAwesome;
   text-align: center;
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
   padding: 20px 15px;
   position: relative;
   cursor: pointer;
@@ -621,14 +610,15 @@ body {
   margin: 0 12px 1em;
 }
 .article-header {
-  padding: 20px 20px 0;
+  padding: 40px 40px;
+  font-size: 1.4em;
 }
 .article-title {
   text-decoration: none;
   font-size: 2em;
   font-weight: bold;
   color: #000;
-  line-height: 1.1em;
+  line-height: 1.2em;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -o-transition: color 0.2s;
@@ -641,7 +631,7 @@ a.article-title:hover {
 .article-entry {
   zoom: 1;
   color: #000;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 .article-entry:before,
 .article-entry:after {
@@ -654,24 +644,16 @@ a.article-title:hover {
 .article-entry p,
 .article-entry table {
   line-height: 1.2em;
+  margin: 0.5em 0;
+}
+.article-entry h1,
+.article-entry h2,
+.article-entry h3,
+.article-entry h4,
+.article-entry h5,
+.article-entry h6 {
+  line-height: 1.2em;
   margin: 1.2em 0;
-}
-.article-entry h1,
-.article-entry h2,
-.article-entry h3,
-.article-entry h4,
-.article-entry h5,
-.article-entry h6 {
-  font-weight: bold;
-}
-.article-entry h1,
-.article-entry h2,
-.article-entry h3,
-.article-entry h4,
-.article-entry h5,
-.article-entry h6 {
-  line-height: 1.1em;
-  margin: 1.1em 0;
 }
 .article-entry a {
   color: #00ceff;
@@ -722,7 +704,7 @@ a.article-title:hover {
   color: #777;
 }
 .article-entry blockquote footer {
-  font-size: 16px;
+  font-size: 14px;
   margin: 1.2em 0;
   font-family: "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
@@ -1260,7 +1242,7 @@ a.article-title:hover {
   border-width: 1px 0;
   overflow: auto;
   color: #f8f8f2;
-  line-height: 19.2px;
+  line-height: 16.8px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
@@ -1322,7 +1304,7 @@ a.article-title:hover {
   padding-right: 20px;
 }
 .article-entry .highlight .line {
-  height: 19.2px;
+  height: 16.8px;
 }
 .article-entry .gist {
   margin: 0 -20px;
