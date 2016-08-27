@@ -73,6 +73,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-note_fpga/q_verilog_template" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/04/03/note_fpga/q_verilog_template/" class="article-date">
+  <time datetime="2013-04-03T09:27:42.000Z" itemprop="datePublished">Apr 3 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/04/03/note_fpga/q_verilog_template/">无意中发现Quartus ii 里面的verilog template</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天才仔细的看了看quartus里面的template里面的内容，很有收获啊。。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// <span class="type">Quartus</span> <span class="type">II</span> <span class="type">Verilog</span> <span class="type">Template</span></div><div class="line">// <span class="type">Signed</span> multiply <span class="keyword">with</span> input <span class="keyword">and</span> output registers</div><div class="line"></div><div class="line">module signed_multiply_with_input_and_output_registers</div><div class="line"><span class="comment">#(parameter WIDTH=8)</span></div><div class="line">(</div><div class="line">     input clk,</div><div class="line">     input signed [<span class="type">WIDTH</span>-<span class="number">1</span>:<span class="number">0</span>] dataa,</div><div class="line">     input signed [<span class="type">WIDTH</span>-<span class="number">1</span>:<span class="number">0</span>] datab,</div><div class="line">     output reg signed [<span class="number">2</span>*<span class="type">WIDTH</span>-<span class="number">1</span>:<span class="number">0</span>] dataout</div><div class="line">);</div><div class="line"></div><div class="line">     // <span class="type">Declare</span> input <span class="keyword">and</span> output registers</div><div class="line">     reg signed [<span class="type">WIDTH</span>-<span class="number">1</span>:<span class="number">0</span>] dataa_reg;</div><div class="line">     reg signed [<span class="type">WIDTH</span>-<span class="number">1</span>:<span class="number">0</span>] datab_reg;</div><div class="line">     wire signed [<span class="number">2</span>*<span class="type">WIDTH</span>-<span class="number">1</span>:<span class="number">0</span>] mult_out;</div><div class="line"></div><div class="line">     // <span class="type">Store</span> the <span class="literal">result</span> <span class="keyword">of</span> the multiply</div><div class="line">     assign mult_out = dataa_reg * datab_reg;</div><div class="line"></div><div class="line">     // <span class="type">Update</span> data</div><div class="line">     always @ (posedge clk)</div><div class="line">     begin</div><div class="line">          dataa_reg &lt;= dataa;</div><div class="line">          datab_reg &lt;= datab;</div><div class="line">          dataout &lt;= mult_out;</div><div class="line">     <span class="keyword">end</span></div><div class="line"></div><div class="line">endmodule</div></pre></td></tr></table></figure>
+
+
+        
+          <p class="article-more-link">
+            <a href="/2013/04/03/note_fpga/q_verilog_template/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/04/03/note_fpga/q_verilog_template/" data-id="qavczluqunvu49v5" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note_jbh/tcpip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/04/02/note_jbh/tcpip/" class="article-date">
+  <time datetime="2013-04-02T11:11:26.000Z" itemprop="datePublished">Apr 2 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/04/02/note_jbh/tcpip/">TCP/IP小笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>资料整理自《嵌入式Linux应用程序开发标准教程》.</p>
+<h1 id="参考模型">参考模型</h1>
+<p>OSI(Open System interconnection)模型分为7层: 应用层, 表示层, 会话层, 传输层, 网络层, 数据链路层和物理层. </p>
+<blockquote>
+<p>这个7层协议模型虽然规定的非常细致和完善, 但在实际中却得不到广泛的应用, 其重要的原因之一就在于它过于复杂. </p>
+</blockquote>
+<p>TCP/IP模型简化为4层: 应用层, 传输层, 网络层和网络接口层.</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2013/04/02/note_jbh/tcpip/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2013/04/02/note_jbh/tcpip/" data-id="p2gq6eipw8g9nl7s" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-note_jbh/static_const" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2013/04/01/note_jbh/static_const/" class="article-date">
@@ -282,7 +383,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -294,6 +395,14 @@
       <ul>
         
           <li>
+            <a href="/2016/08/27/note_asic/makefile_ext/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/27/note_asic/uvm_factory/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/27/note_fpga/verilog_parameterize/">(no title)</a>
           </li>
         
@@ -303,14 +412,6 @@
         
           <li>
             <a href="/2015/01/28/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑环境</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
-          </li>
-        
-          <li>
-            <a href="/2014/08/22/note_python/python2cmd/">将Python设为cmd.exe下的命令</a>
           </li>
         
       </ul>

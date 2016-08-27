@@ -3,17 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>TMS320F28335的基本信息 | Central Perk</title>
+  <title>Central Perk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TMS320F28335属于TMS320C2000™数字信号控制器(DSC)系列。TI中C28x系列就是DSC，之前的产品都是定点型的DSP，而TMS320F28335所属的F2833x系列是带浮点运算单元的，用C28x+FPU表示。28335的FPU是一个32位float浮点运算单元，是其在DSC产品里面最大的特点。硬件FPU很犀利，直接让CPU的运算能力升级。">
+  <meta name="description" content="Title: Verification匠心Status: PublicTags: MakefileDate: 2015-7-27 22:04:39
+[TOC]
+这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
+Makefile中空变量的妙用
+运行时指定fsdb的文件名
+使用Package来管理源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TMS320F28335的基本信息">
-<meta property="og:url" content="http://yoursite.com/2013/04/07/note_dsp/basic_info/">
+<meta property="og:title" content="Central Perk">
+<meta property="og:url" content="http://yoursite.com/2016/08/27/note_asic/makefile_ext/">
 <meta property="og:site_name" content="Central Perk">
-<meta property="og:description" content="TMS320F28335属于TMS320C2000™数字信号控制器(DSC)系列。TI中C28x系列就是DSC，之前的产品都是定点型的DSP，而TMS320F28335所属的F2833x系列是带浮点运算单元的，用C28x+FPU表示。28335的FPU是一个32位float浮点运算单元，是其在DSC产品里面最大的特点。硬件FPU很犀利，直接让CPU的运算能力升级。">
+<meta property="og:description" content="Title: Verification匠心Status: PublicTags: MakefileDate: 2015-7-27 22:04:39
+[TOC]
+这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
+Makefile中空变量的妙用
+运行时指定fsdb的文件名
+使用Package来管理源码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TMS320F28335的基本信息">
-<meta name="twitter:description" content="TMS320F28335属于TMS320C2000™数字信号控制器(DSC)系列。TI中C28x系列就是DSC，之前的产品都是定点型的DSP，而TMS320F28335所属的F2833x系列是带浮点运算单元的，用C28x+FPU表示。28335的FPU是一个32位float浮点运算单元，是其在DSC产品里面最大的特点。硬件FPU很犀利，直接让CPU的运算能力升级。">
+<meta name="twitter:title" content="Central Perk">
+<meta name="twitter:description" content="Title: Verification匠心Status: PublicTags: MakefileDate: 2015-7-27 22:04:39
+[TOC]
+这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
+Makefile中空变量的妙用
+运行时指定fsdb的文件名
+使用Package来管理源码">
 
   
     <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
@@ -71,41 +86,30 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-note_dsp/basic_info" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-note_asic/makefile_ext" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2013/04/07/note_dsp/basic_info/" class="article-date">
-  <time datetime="2013-04-07T02:32:03.000Z" itemprop="datePublished">Apr 7 2013</time>
+    <a href="/2016/08/27/note_asic/makefile_ext/" class="article-date">
+  <time datetime="2016-08-27T14:08:08.000Z" itemprop="datePublished">Aug 27 2016</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      TMS320F28335的基本信息
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>TMS320F28335属于TMS320C2000™数字信号控制器(DSC)系列。TI中C28x系列就是DSC，之前的产品都是定点型的DSP，而TMS320F28335所属的F2833x系列是带浮点运算单元的，用C28x+FPU表示。28335的FPU是一个32位float浮点运算单元，是其在DSC产品里面最大的特点。硬件FPU很犀利，直接让CPU的运算能力升级。</p>
-<a id="more"></a>
-
-<p>F2833x系列还有28332和28334，三者的区别目测就是flash容量的区别，容量依编号从小到大分别为：64k*16b、128k*16b、256k*16b；F2823x也有28232、28234跟28235，容量跟F2833x同编号的相等，区别就是有无FPU。</p>
-<p>28335的CPU总线为哈佛总线结构，即其程序存储空间跟数据存储空间使用不同的总线。程序总线为只读总线，地址线22根，数据线32根，指令的位宽是32位的，这就是为什么28335是32位DSP；数据的读写总线是独立的，分别有32根地址线和32根数据线，就是说读操作一套总线写一套总线。</p>
-<p>28335的外设寄存器组是映射在数据存储空间里面的，但是其读写操作又是有另外一套外设总线的。这个外设总线还分3种：外设结构(peripheral frame)2使用的16位位宽、外设结构1使用的兼容16位和32位的还有外设结构3使用的兼容16位32位和DMA访问的。这3种总线的地址线都是16位的。</p>
-<p>总的说来28335的总线结构相当复杂，但同时也意味着指令的读取、数据的读操作、数据的写操作、外设寄存器的访问都是可以独立完成的，性能也就是这么提升上去的。</p>
+        <p>Title: Verification匠心<br>Status: Public<br>Tags: Makefile<br>Date: 2015-7-27 22:04:39</p>
+<p>[TOC]</p>
+<p>这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.</p>
+<h1 id="Makefile中空变量的妙用">Makefile中空变量的妙用</h1>
+<h1 id="运行时指定fsdb的文件名">运行时指定fsdb的文件名</h1>
+<h1 id="使用Package来管理源码">使用Package来管理源码</h1>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2013/04/07/note_dsp/basic_info/" data-id="trvw3qy2zo36t895" class="article-share-link" data-share="baidu">Share</a>
+        <a data-url="http://yoursite.com/2016/08/27/note_asic/makefile_ext/" data-id="t5wy8ji8s65y8ciu" class="article-share-link" data-share="baidu">Share</a>
       
 
       
@@ -117,19 +121,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2013/04/12/note_fpga/ifstatement/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Verilog的逻辑判断语句怎么写
-        
-      </div>
-    </a>
   
-  
-    <a href="/2013/04/03/note_fpga/q_verilog_template/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/27/note_asic/uvm_factory/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">无意中发现Quartus ii 里面的verilog template</div>
+      <div class="article-nav-title"></div>
     </a>
   
 </nav>
