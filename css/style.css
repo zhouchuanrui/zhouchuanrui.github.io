@@ -125,7 +125,7 @@ body,
 }
 body {
   background: #eee;
-  font: 14px/1.2em "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font: 14px/1.4em "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
@@ -225,7 +225,7 @@ body {
 .article-entry h6,
 .widget h6 {
   color: #000;
-  font-family: "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 .article-entry h1 a,
 .widget h1 a,
@@ -258,31 +258,31 @@ body {
 }
 .article-entry h1,
 .widget h1 {
-  font-size: 2.2em;
+  font-size: 2em;
 }
 .article-entry h2,
 .widget h2 {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .article-entry h3,
 .widget h3 {
-  font-size: 1.8em;
+  font-size: 1.5em;
 }
 .article-entry h4,
 .widget h4 {
-  font-size: 1.8em;
+  font-size: 1.5em;
 }
 .article-entry h5,
 .widget h5 {
-  font-size: 1.8em;
+  font-size: 1.5em;
 }
 .article-entry h6,
 .widget h6 {
-  font-size: 1.8em;
+  font-size: 1.5em;
 }
 .article-entry p,
 .widget p {
-  font-size: 1.4em;
+  font-size: 1.25em;
   color: #555;
 }
 .article-entry hr,
@@ -333,8 +333,8 @@ body {
 .article-entry dl,
 .widget dl {
   margin: 0 20px;
-  line-height: 1.2em;
-  font-size: 1.4em;
+  line-height: 1.4em;
+  font-size: 1.1em;
   color: #555;
 }
 .article-entry ul ul,
@@ -554,7 +554,7 @@ body {
   background: none;
   color: #000;
   width: 100%;
-  font: 13px "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font: 13px "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   outline: none;
 }
 .search-form-input::-webkit-search-results-decoration,
@@ -615,8 +615,8 @@ body {
 }
 .article-title {
   text-decoration: none;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 1.8em;
+  font-weight: Bold;
   color: #000;
   line-height: 1.2em;
   -webkit-transition: color 0.2s;
@@ -643,7 +643,7 @@ a.article-title:hover {
 }
 .article-entry p,
 .article-entry table {
-  line-height: 1.2em;
+  line-height: 1.4em;
   margin: 0.5em 0;
 }
 .article-entry h1,
@@ -652,8 +652,9 @@ a.article-title:hover {
 .article-entry h4,
 .article-entry h5,
 .article-entry h6 {
+  color: #555;
   line-height: 1.2em;
-  margin: 1.2em 0;
+  margin: 0.8em 0;
 }
 .article-entry a {
   color: #00ceff;
@@ -666,8 +667,8 @@ a.article-title:hover {
 .article-entry ul,
 .article-entry ol,
 .article-entry dl {
-  margin-top: 1.2em;
-  margin-bottom: 1.2em;
+  margin-top: 1.4em;
+  margin-bottom: 1.4em;
 }
 .article-entry img,
 .article-entry video {
@@ -697,16 +698,16 @@ a.article-title:hover {
   padding: 10px 0;
 }
 .article-entry blockquote {
-  font-family: "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
-  margin: 1.2em 0;
+  font-family: Georgia, "Droid Serif", Serif;
+  margin: 1.4em 0;
   padding: 0 0.8em;
   border-left: 4px solid #ddd;
   color: #777;
 }
 .article-entry blockquote footer {
   font-size: 14px;
-  margin: 1.2em 0;
-  font-family: "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  margin: 1.4em 0;
+  font-family: "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -769,9 +770,9 @@ a.article-title:hover {
 .article-footer {
   zoom: 1;
   font-size: 0.85em;
-  line-height: 1.2em;
+  line-height: 1.4em;
   border-top: 2px solid #ddd;
-  padding-top: 1.2em;
+  padding-top: 1.4em;
   margin: 0 20px 20px;
 }
 .article-footer:before,
@@ -892,7 +893,7 @@ a.article-title:hover {
 }
 .article-nav-title {
   font-size: 0.85em;
-  line-height: 1.2em;
+  line-height: 1.4em;
   margin-top: 0.5em;
 }
 .article-share-box {
@@ -916,7 +917,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   padding: 0 15px;
   color: #000;
   outline: none;
@@ -1143,7 +1144,7 @@ a.article-title:hover {
   -o-transition: color 0.2s;
   -ms-transition: color 0.2s;
   transition: color 0.2s;
-  line-height: 1.2em;
+  line-height: 1.4em;
 }
 .archive-article-title:hover {
   color: #00ceff;
@@ -1229,20 +1230,20 @@ a.article-title:hover {
   text-decoration: underline;
 }
 #footer-info {
-  line-height: 1.2em;
+  line-height: 1.4em;
   font-size: 0.85em;
 }
 .article-entry pre,
 .article-entry .highlight {
-  background: #272822;
+  background: #eee;
   margin: 0 -20px;
   padding: 15px 20px;
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
   overflow: auto;
-  color: #f8f8f2;
-  line-height: 16.8px;
+  color: #8ea318;
+  line-height: 19.599999999999998px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
@@ -1284,7 +1285,7 @@ a.article-title:hover {
 .article-entry .highlight figcaption {
   zoom: 1;
   font-size: 0.85em;
-  color: #75715e;
+  color: #8ea318;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -1304,14 +1305,14 @@ a.article-title:hover {
   padding-right: 20px;
 }
 .article-entry .highlight .line {
-  height: 16.8px;
+  height: 19.599999999999998px;
 }
 .article-entry .gist {
   margin: 0 -20px;
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
-  background: #272822;
+  background: #eee;
   padding: 15px 20px 15px 0;
 }
 .article-entry .gist .gist-file {
@@ -1337,9 +1338,9 @@ a.article-title:hover {
   border: none;
 }
 .article-entry .gist .gist-file .gist-meta {
-  background: #272822;
-  color: #75715e;
-  font: 0.85em "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  background: #eee;
+  color: #8ea318;
+  font: 0.85em "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   text-shadow: 0 0;
   padding: 0;
   margin-top: 1em;
@@ -1354,10 +1355,10 @@ a.article-title:hover {
 }
 pre .comment,
 pre .preprocessor {
-  color: #75715e;
+  color: #8ea318;
 }
 pre .tag {
-  color: #f8f8f2;
+  color: #8ea318;
 }
 pre .title,
 pre .variable,
@@ -1370,22 +1371,22 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #f92672;
+  color: #8ea318;
 }
 pre .number,
 pre .built_in,
 pre .literal,
 pre .constant {
-  color: #ae81ff;
+  color: #8ea318;
 }
 pre .params {
-  color: #fd971f;
+  color: #8ea318;
 }
 pre .class,
 pre .ruby .class .title,
 pre .css .rules .attribute,
 pre .attribute {
-  color: #a6e22e;
+  color: #8ea318;
 }
 pre .string,
 pre .value,
@@ -1393,10 +1394,10 @@ pre .inheritance,
 pre .header,
 pre .ruby .symbol,
 pre .xml .cdata {
-  color: #e6db74;
+  color: #8ea318;
 }
 pre .css .hexcolor {
-  color: #a1efe4;
+  color: #8ea318;
 }
 pre .function,
 pre .python .decorator,
@@ -1406,11 +1407,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #66d9ef;
+  color: #8ea318;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #66d9ef;
+  color: #8ea318;
 }
 @media screen and (max-width: 479px) {
   #mobile-nav {
@@ -1477,7 +1478,7 @@ pre .javascript .function {
   list-style: disc;
 }
 .widget {
-  line-height: 1.2em;
+  line-height: 1.4em;
   word-wrap: break-word;
   font-size: 0.9em;
 }
