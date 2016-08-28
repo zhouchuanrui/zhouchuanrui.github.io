@@ -8,8 +8,7 @@
   <meta name="description" content="[TOC]
 这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
 Makefile中空变量的妙用
-运行时指定fsdb的文件名
-使用Package来管理源码">
+做数字验证的时候, 仿真器的编译和运行需要很多的编译运行参数, 一般Makefile里面就会写了很多东西了. 不过, 大多数时候, 在验证平台的调试阶段, 你会需要添加很多额外的编译选项和运行选项比如编译时添加-debug_all编译为行调试模式, 运行时添加+ntb_opt random_s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Verification匠心">
 <meta property="og:url" content="http://yoursite.com/2015/07/27/note_asic/makefile_ext/">
@@ -17,15 +16,13 @@ Makefile中空变量的妙用
 <meta property="og:description" content="[TOC]
 这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
 Makefile中空变量的妙用
-运行时指定fsdb的文件名
-使用Package来管理源码">
+做数字验证的时候, 仿真器的编译和运行需要很多的编译运行参数, 一般Makefile里面就会写了很多东西了. 不过, 大多数时候, 在验证平台的调试阶段, 你会需要添加很多额外的编译选项和运行选项比如编译时添加-debug_all编译为行调试模式, 运行时添加+ntb_opt random_s">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Verification匠心">
 <meta name="twitter:description" content="[TOC]
 这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
 Makefile中空变量的妙用
-运行时指定fsdb的文件名
-使用Package来管理源码">
+做数字验证的时候, 仿真器的编译和运行需要很多的编译运行参数, 一般Makefile里面就会写了很多东西了. 不过, 大多数时候, 在验证平台的调试阶段, 你会需要添加很多额外的编译选项和运行选项比如编译时添加-debug_all编译为行调试模式, 运行时添加+ntb_opt random_s">
 
   
     <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
@@ -108,6 +105,17 @@ Makefile中空变量的妙用
         <p>[TOC]</p>
 <p>这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.</p>
 <h1 id="Makefile中空变量的妙用">Makefile中空变量的妙用</h1>
+<p>做数字验证的时候, 仿真器的编译和运行需要很多的编译运行参数, 一般Makefile里面就会写了很多东西了. 不过, 大多数时候, 在验证平台的调试阶段, 你会需要添加很多额外的编译选项和运行选项比如编译时添加<code>-debug_all</code>编译为行调试模式, 运行时添加<code>+ntb_opt random_seed=&lt;n&gt;</code>指定随机种子运行. 另外, UVM也引入了很多的运行参数. </p>
+<a id="more"></a>
+
+<p>执行make的时候不能额外的追加参数, 比如<code>make vcs_compile -debug_all</code>的时候<code>-debug_all</code>是不能生效的. 这样一来, 你的Makefile会变的很复杂, target好多, 似乎用shell才是正解了. </p>
+<p>不过, make的时候, Makefile的变量是可以重写的, 这是个转机. 我在Makefile里会设置一个空变量:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">ext =</span></div></pre></td></tr></table></figure>
+
+<p>然后再各个target里都添加进这个变量:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">vcs_compile:</div><div class="line">    vcs ${VCS_CMP_OPT} ${ext} <span class="keyword">...</span></div><div class="line">vcs_run:</div><div class="line">    ./simv ${VCS_RUN_OPT} ${ext} <span class="keyword">...</span></div><div class="line">ius_compile:</div><div class="line">    irun ${IUS_CMP_OPT} ${ext} <span class="keyword">...</span></div><div class="line">ius_run:</div><div class="line">    irun ${IUS_RUN_OPT} ${ext} <span class="keyword">...</span></div><div class="line">verdi_run:</div><div class="line">    verdi ${VERDI_OPT} ${ext} <span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>然后根据需要在make的时候重写<code>ext</code>变量, 比如<code>make vcs_compile ext=-debug_all</code>来编译为行调试模式, <code>make vcs_run ext=-ucli</code>进入<code>ucli</code>运行模式, 要添加多个选项的时候需要用引号(推荐用单引号, 双引号会转义, 这个跟shell的规则是一样的)比如<code>make vcs_run ext=&#39;+UVM_VERBOSITY=UVM_LOW +UVM_PHASE_TRACE&#39;</code>添加多个UVM运行选项.</p>
 <h1 id="运行时指定fsdb的文件名">运行时指定fsdb的文件名</h1>
 <h1 id="使用Package来管理源码">使用Package来管理源码</h1>
 
@@ -137,9 +145,9 @@ Makefile中空变量的妙用
     </a>
   
   
-    <a href="/2014/10/27/note_fpga/readmem/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/04/28/note_others/perl_notes_on_learning_perl/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">$readmem是可综合的</div>
+      <div class="article-nav-title">《Learning PERL》笔记</div>
     </a>
   
 </nav>
@@ -161,7 +169,7 @@ Makefile中空变量的妙用
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -173,19 +181,19 @@ Makefile中空变量的妙用
       <ul>
         
           <li>
-            <a href="/2016/08/27/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑环境</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
-          </li>
-        
-          <li>
             <a href="/2015/08/27/note_asic/uvm_factory/">UVM源码探索之Factory(上篇)</a>
           </li>
         
           <li>
             <a href="/2015/07/27/note_asic/makefile_ext/">Verification匠心</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/09/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑环境</a>
           </li>
         
           <li>
