@@ -116,8 +116,33 @@ Makefile中空变量的妙用
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">vcs_compile:</div><div class="line">    vcs ${VCS_CMP_OPT} ${ext} <span class="keyword">...</span></div><div class="line">vcs_run:</div><div class="line">    ./simv ${VCS_RUN_OPT} ${ext} <span class="keyword">...</span></div><div class="line">ius_compile:</div><div class="line">    irun ${IUS_CMP_OPT} ${ext} <span class="keyword">...</span></div><div class="line">ius_run:</div><div class="line">    irun ${IUS_RUN_OPT} ${ext} <span class="keyword">...</span></div><div class="line">verdi_run:</div><div class="line">    verdi ${VERDI_OPT} ${ext} <span class="keyword">...</span></div></pre></td></tr></table></figure>
 
 <p>然后根据需要在make的时候重写<code>ext</code>变量, 比如<code>make vcs_compile ext=-debug_all</code>来编译为行调试模式, <code>make vcs_run ext=-ucli</code>进入<code>ucli</code>运行模式, 要添加多个选项的时候需要用引号(推荐用单引号, 双引号会转义, 这个跟shell的规则是一样的)比如<code>make vcs_run ext=&#39;+UVM_VERBOSITY=UVM_LOW +UVM_PHASE_TRACE&#39;</code>添加多个UVM运行选项.</p>
+<p>做个类比的话, Makefile里的其他变量相当于sequence item里面的一些通用约束块, 这个空变量相当于sequence中的inline constraint, 用起灵活了许多.</p>
+<h1 id="使用Package来组织源码">使用Package来组织源码</h1>
+<p>Mentor的UVM Cookbook的最后部分有一些语言规范, 里面推荐使用Package来组织源码, 其实这也是UVM源码的组织方式.</p>
+<p>这个规范的内涵包括:</p>
+<ol>
+<li>使用<code>package endpackage</code>来<code>include</code>类定义的文件, 而且只在Package里进行<code>include</code>, 在类定义文件里不进行<code>include</code>;</li>
+<li>Package文件以<code>_pkg</code>结尾并使用<code>.sv</code>后缀名, 表示一个编译单元, 类定义使用<code>.svh</code>后缀表示非编译单元, 这也是跟UVM一致的;</li>
+<li>为每个复用单元都建立Package, 在使用UVM的时候也就是从agent开始就要使用Package了;</li>
+</ol>
+<p>举个例子吧, 有这样的一个目录:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">~</span>prj/</div><div class="line"><span class="bullet">  ~</span>tb/</div><div class="line"><span class="bullet">    ~</span>agent/</div><div class="line">      -<span class="ruby"><span class="constant">MyDriver</span>.svh </span></div><div class="line">      -<span class="ruby"><span class="constant">MyMonitor</span>.svh </span></div><div class="line">      -<span class="ruby"><span class="constant">MySequencer</span>.svh </span></div><div class="line">      +agent_pkg.sv</div><div class="line">    -<span class="ruby"><span class="constant">MyEnv</span>.svh</span></div><div class="line">    -<span class="ruby"><span class="constant">MyRefm</span>.svh</span></div><div class="line">    -<span class="ruby"><span class="constant">MyScoreboard</span>.svh</span></div><div class="line">    +env_pkg.sv</div></pre></td></tr></table></figure>
+
+<p>就需要添加<code>agent_pkg.sv</code>和<code>env_pkg.sv</code>了, <code>agent_pkg.sv</code>里面大致是这样的:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">package agent_pkg;</div><div class="line">    import uvm_pgk::*;</div><div class="line">    `include "uvm_macros.svh"</div><div class="line">    ...</div><div class="line">    `include <span class="string">"tb/agent/MyDriver.svh"</span></div><div class="line">    `include "tb/agent/MyMonitor.svh"</div><div class="line">    `include <span class="string">"tb/agent/MySequencer.svh"</span></div><div class="line">    <span class="keyword">...</span></div><div class="line">endpackage</div></pre></td></tr></table></figure>
+
+<p><code>env_pkg.sv</code>里面大致是这样的:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">package agent_pkg;</div><div class="line">    import uvm_pgk::*;</div><div class="line">    `include "uvm_macros.svh"</div><div class="line">    ...</div><div class="line">    `include <span class="string">"tb/MyEnv.svh"</span></div><div class="line">    `include "tb/MyRefm.svh"</div><div class="line">    `include <span class="string">"tb/MyScoreboard.svh"</span></div><div class="line">    <span class="keyword">...</span></div><div class="line">endpackage</div></pre></td></tr></table></figure>
+
+<p>然后在编译的filelist里需要把这些Package文件都放进去.</p>
+<p>这么做的好处是什么呢? 归纳起来有这么几点:</p>
+<ol>
+<li>把include文件集中到一处显得比较清晰, 更容易复用;</li>
+<li>做引用的时候<code>import</code>比<code>include</code>要安全, 因为前者多次引用完全没问题, 后者的定义文件里如果没写<code>ifndef</code>编译预处理不小心出现多处<code>include</code>的话是会编译出错的;</li>
+<li>Package创建了一个独立的编译单元, 仿真器在做增量编译的时候使用Package会获得一点点性能上的提升, 此外要注意的是<code>module</code>和<code>interface</code>是天然的独立编译单元, 按照这个规范, top module和dut interface文件都应该以<code>.sv</code>结尾.</li>
+</ol>
+<p>此外要注意的是, 虽然有<code>import</code>语法用来做显式引用(而且使用UVM的时候就是这么用的), 但是其实用<code>package_name::resource</code>的方式更安全. 比如说你的多个Package里面都定义了共用的枚举, 而这些枚举恰好有重名, 然后这些同名的枚举是不同的值, 这样你在用<code>import package_name::*;</code>的时候就可能会有枚举冲突, 而用<code>package_name::enum_item</code>这种格式就不会有问题. </p>
 <h1 id="运行时指定fsdb的文件名">运行时指定fsdb的文件名</h1>
-<h1 id="使用Package来管理源码">使用Package来管理源码</h1>
 
       
     </div>

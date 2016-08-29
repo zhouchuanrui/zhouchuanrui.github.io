@@ -644,7 +644,7 @@ a.article-title:hover {
 .article-entry p,
 .article-entry table {
   line-height: 1.4em;
-  margin: 0.5em 0;
+  margin: 0.8em 0;
 }
 .article-entry h1,
 .article-entry h2,
@@ -654,7 +654,7 @@ a.article-title:hover {
 .article-entry h6 {
   color: #555;
   line-height: 1.2em;
-  margin: 0.8em 0;
+  margin: 1em 0;
 }
 .article-entry a {
   color: #00ceff;
