@@ -11,7 +11,7 @@ Makefile中空变量的妙用
 做数字验证的时候, 仿真器的编译和运行需要很多的编译运行参数, 一般Makefile里面就会写了很多东西了. 不过, 大多数时候, 在验证平台的调试阶段, 你会需要添加很多额外的编译选项和运行选项比如编译时添加-debug_all编译为行调试模式, 运行时添加+ntb_opt random_s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Verification匠心">
-<meta property="og:url" content="http://yoursite.com/2015/07/27/note_asic/makefile_ext/">
+<meta property="og:url" content="http://yoursite.com/2015/07/27/note_asic/verif_crafts/">
 <meta property="og:site_name" content="Central Perk">
 <meta property="og:description" content="[TOC]
 这篇笔记用于记录一些验证工作过程中的一些有益的小技巧和总结.
@@ -80,9 +80,9 @@ Makefile中空变量的妙用
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-note_asic/makefile_ext" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-note_asic/verif_crafts" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/07/27/note_asic/makefile_ext/" class="article-date">
+    <a href="/2015/07/27/note_asic/verif_crafts/" class="article-date">
   <time datetime="2015-07-27T14:04:39.000Z" itemprop="datePublished">Jul 27 2015</time>
 </a>
     
@@ -142,13 +142,27 @@ Makefile中空变量的妙用
 <li>Package创建了一个独立的编译单元, 仿真器在做增量编译的时候使用Package会获得一点点性能上的提升, 此外要注意的是<code>module</code>和<code>interface</code>是天然的独立编译单元, 按照这个规范, top module和dut interface文件都应该以<code>.sv</code>结尾.</li>
 </ol>
 <p>此外要注意的是, 虽然有<code>import</code>语法用来做显式引用(而且使用UVM的时候就是这么用的), 但是其实用<code>package_name::resource</code>的方式更安全. 比如说你的多个Package里面都定义了共用的枚举, 而这些枚举恰好有重名, 然后这些同名的枚举是不同的值, 这样你在用<code>import package_name::*;</code>的时候就可能会有枚举冲突, 而用<code>package_name::enum_item</code>这种格式就不会有问题. </p>
-<h1 id="运行时指定fsdb的文件名">运行时指定fsdb的文件名</h1>
+<h1 id="使用编译时外部宏和运行时命令行参数实现验证平台的”多态”">使用编译时外部宏和运行时命令行参数实现验证平台的”多态”</h1>
+<p>plusargs是Systemverilog继承自Verilog的语法, 分为<code>$test$plusargs</code>和<code>$value$plusargs</code>两类, 用于扩展运行时参数. UVM使用的命令行参数, <code>UVM_TESTNAME</code>, <code>UVM_VERBOSITY</code>和<code>UVM_OBJECTION_TRACE</code>等都是通过plusargs实现的. </p>
+<p>使用自定义plusargs, 可以灵活的实现很多很实用的功能. 为了实现运行不同的<code>uvm_test</code>时生成不同名字的fsdb波形文件, 我的验证平台top中有这样的代码:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">`ifndef <span class="constant">NO_DUMP</span></div><div class="line">initial <span class="symbol">begin:</span> dump_files</div><div class="line">    string <span class="keyword">fn</span>;</div><div class="line">    if(<span class="variable">$value</span><span class="variable">$plusargs</span>(<span class="string">"UVM_TESTNAME=%s"</span>, <span class="keyword">fn</span>))</div><div class="line">        <span class="keyword">fn</span> = {<span class="keyword">fn</span>, <span class="string">".fsdb"</span>};</div><div class="line">    else</div><div class="line">        <span class="keyword">fn</span> = <span class="string">"test.fsdb"</span>;</div><div class="line">    <span class="comment">#0.1;</span></div><div class="line">    <span class="variable">$fsdbDumpfile</span>(<span class="keyword">fn</span>);</div><div class="line">    ...</div><div class="line"><span class="keyword">end</span></div><div class="line">`endif</div></pre></td></tr></table></figure>
+
+<p>直接使用<code>UVM_TESTNAME</code>这个用于<code>run_test</code>的这个value plusargs再加上<code>.fsdb</code>后缀拼接成文件名, 然后再dump, 实现了fsdb文件和testcase的绑定. 当然这里也可以用单独的value pulsagrs来指定fsdb文件名. 中间的<code>#0.1</code>延时是考虑到运行的时候有可能打错case的名字, 这个时候<code>run_test</code>先运行报错退出, 就不会生成错误的fsdb文件了.</p>
+<p>其他的诸如, 控制一个sequence的运行次数, 控制是否进行覆盖率采集, 控制scoreboard的信息输出到STD还是文件等, 都可以用自定义的plusargs方便的实现. 这个比起定义不同的<code>uvm_test</code>使用<code>config_class</code>来生成不同的验证平台来, 要方便多了.</p>
+<p>除了plusargs之外, 宏也是实现更改验证平台行为的一大利器. 注意到第一行的<code>ifndef</code>编译预处理命令了吗? 也就是说编译时添加宏<code>+define+NO_DUMP</code>可以去掉这个initial块. 其实要实现控制dump波形文件的开关的话, 直接用<code>$test$plusargs</code>才是更好的方案:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">...</span></div><div class="line"><span class="comment">#0.1;</span></div><div class="line"><span class="keyword">if</span> (!$test$plusargs(<span class="string">"NO_DUMP"</span>)) begin</div><div class="line">    $fsdbDumpfile(fn);</div><div class="line">    <span class="keyword">...</span></div><div class="line">end</div><div class="line"><span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>因为编译时的外部宏是编译时行为, 更改宏的话需要重新编译, 灵活性不如plusargs. 不过呢, 这里的代码已经显示出宏跟plusargs的区别了: plusargs只能出现在一个procedure block内, 而宏没有这个限制.</p>
+<p>比如说, 为了方便, 你的验证平台的top里例化了多个可以独立运行的DUT, 在做一些单独的DUT验证用例然后仿真时间又比较长的时候, 你想要屏蔽不需要的DUT, 这个时候就只能用宏了比如:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="escape">`i</span>fndef NO_DUT_HASH</div><div class="line">hash m_hash(</div><div class="line">    .clk   (clk),</div><div class="line">    .rst_n (rst_n),</div><div class="line">    ...</div><div class="line">)<span class="comment">;</span></div><div class="line"><span class="escape">`e</span>ndif </div><div class="line"></div><div class="line"><span class="escape">`i</span>fndef NO_DUT_AES</div><div class="line">aes m_aes(</div><div class="line">    .clk   (clk),</div><div class="line">    .rst_n (rst_n),</div><div class="line">    ...</div><div class="line">)<span class="comment">;</span></div><div class="line"><span class="escape">`e</span>ndif</div></pre></td></tr></table></figure>
+
+<p>所以, 可以在procedure block中控制的行为使用plusargs, 其他地方用宏, 两者一结合, 就可以实现灵活强大的”多态”验证平台了.</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/07/27/note_asic/makefile_ext/" data-id="zu6ps3h3w6iw5x2a" class="article-share-link" data-share="baidu">Share</a>
+        <a data-url="http://yoursite.com/2015/07/27/note_asic/verif_crafts/" data-id="mk276hpuzewo21oz" class="article-share-link" data-share="baidu">Share</a>
       
 
       
@@ -210,7 +224,7 @@ Makefile中空变量的妙用
           </li>
         
           <li>
-            <a href="/2015/07/27/note_asic/makefile_ext/">Verification匠心</a>
+            <a href="/2015/07/27/note_asic/verif_crafts/">Verification匠心</a>
           </li>
         
           <li>
