@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Verilog小细节 | Central Perk</title>
+  <title>Archives: 2016/7 | Central Perk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="初学verilog的刚知道还有可综合不可综合的时候，觉得可综合的verilog真是太简单了，用到的语法只有一点点，现在看看实在是孤陋寡闻了。今天了解到的新的东西总结一下：">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Verilog小细节">
-<meta property="og:url" content="http://yoursite.com/2013/05/04/note_fpga/little_verilog/">
+  <meta name="description" content="Ignorance is a rare rare blessing~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Central Perk">
+<meta property="og:url" content="http://yoursite.com/archives/2016/07/">
 <meta property="og:site_name" content="Central Perk">
-<meta property="og:description" content="初学verilog的刚知道还有可综合不可综合的时候，觉得可综合的verilog真是太简单了，用到的语法只有一点点，现在看看实在是孤陋寡闻了。今天了解到的新的东西总结一下：">
+<meta property="og:description" content="Ignorance is a rare rare blessing~">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Verilog小细节">
-<meta name="twitter:description" content="初学verilog的刚知道还有可综合不可综合的时候，觉得可综合的verilog真是太简单了，用到的语法只有一点点，现在看看实在是孤陋寡闻了。今天了解到的新的东西总结一下：">
+<meta name="twitter:title" content="Central Perk">
+<meta name="twitter:description" content="Ignorance is a rare rare blessing~">
 
   
     <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
@@ -71,84 +71,39 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-note_fpga/little_verilog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/05/04/note_fpga/little_verilog/" class="article-date">
-  <time datetime="2013-05-04T11:35:02.000Z" itemprop="datePublished">May 4 2013</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Verilog小细节
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/07/27/note_asic/verif_crafts/" class="archive-article-date">
+  <time datetime="2016-07-27T14:04:39.000Z" itemprop="datePublished">Jul 27</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/07/27/note_asic/verif_crafts/">Verification匠心</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>初学verilog的刚知道还有可综合不可综合的时候，觉得可综合的verilog真是太简单了，用到的语法只有一点点，现在看看实在是孤陋寡闻了。今天了解到的新的东西总结一下：</p>
-<a id="more"></a>
-
-<ul>
-<li>verilog-2001的RTL可综合标准可以参考文档 IEEE P1364.1 / D1.6 Draft Standard for Verilog(R) Register Transfer Level Synthesis，这个文档规定了综合工具对语法的支持；</li>
-<li>线网类型除了<code>wire</code>之外还有<code>tri,tri0,tri1,wand,wor,triand,trior,suppy0,supply1</code>，其中：<ul>
-<li><code>tri,tri0,tri1</code>表示三态的线网（其实<code>wire</code>的z状态也可以表示高阻，当时对这个不在意可能是这个原因）<code>tri0</code>跟<code>tri1</code>分别是带下拉跟上拉电阻。其实上下拉电阻只在输入断开的时候起作用，这个设计中基本用不到，这个可能是对这个不在意的另一个原因。另，1364.1文档中说综合是不支持<code>tri0</code>跟<code>tri1</code>的；</li>
-<li><code>wand,wor,triand,trior</code>，后半部分可以看出这个是带逻辑结果线型变量，也就是说是多输入的；</li>
-<li><code>supply0</code>和<code>supply1</code>分别表示逻辑的0和1，是无输入的；</li>
-</ul>
-</li>
-<li>综合支持的编译指令有`default_nettype,`define,`undef,`include,`ifdef, `else, `elsif, `endif, `ifndef,其中：<ul>
-<li>`defalut_nettype后可跟<code>tri,tri0,tri1,wand,wor,triand,trior,none</code>，指示隐含的线网(模块的IO等)的默认类型，如果没有这条命令则默认为<code>wire</code>，如果选择none则有隐含的线网类型时会报错——这个其实蛮好的，可以做代码规范性检查；</li>
-<li>`define是支持参数的，跟C的带参数宏是一样的；</li>
-</ul>
-</li>
-<li>interger其实是带符号的，不过verilog-2001中的<code>wire</code>和<code>reg</code>都已经是支持signed定义关键字了</li>
-</ul>
-<p>总的说来，又一次让我认识到verilog的内容并不是这么简单的，细节还是相当多的。体会是还是应该相信官方的文档已经实践，不要道听途说。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2013/05/04/note_fpga/little_verilog/" data-id="0yceqdrtnymggmx7" class="article-share-link" data-share="baidu">Share</a>
-      
-
-      
-
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2013/05/04/note_fpga/blk&nonblk/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一个很好的解释阻塞赋值和非阻塞赋值的例子
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2013/04/29/note_jbh/process_and_thread/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">进程与线程小笔记</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
+  
+  
+    </div></section>
+  
 </section>
         
           <aside id="sidebar">
