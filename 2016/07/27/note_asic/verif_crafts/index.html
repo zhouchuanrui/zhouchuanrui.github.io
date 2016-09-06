@@ -139,7 +139,7 @@ Makefile中空变量的妙用
 <ol>
 <li>把include文件集中到一处显得比较清晰, 更容易复用;</li>
 <li>做引用的时候<code>import</code>比<code>include</code>要安全, 因为前者多次引用完全没问题, 后者的定义文件里如果没写<code>ifndef</code>编译预处理不小心出现多处<code>include</code>的话是会编译出错的;</li>
-<li>Package创建了一个独立的编译单元, 仿真器在做增量编译的时候使用Package会获得一点点性能上的提升, 此外要注意的是<code>module</code>和<code>interface</code>是天然的独立编译单元, 按照这个规范, top module和dut interface文件都应该以<code>.sv</code>结尾.</li>
+<li>Package创建了一个独立的编译单元, 仿真器在做增量编译的时候使用Package会获得一点点性能上的提升. 要注意<code>module</code>和<code>interface</code>是天然的独立编译单元, 是不可以include到Package里面的语法结构, 按照这个规范, top module和dut interface文件都应该以<code>.sv</code>结尾.</li>
 </ol>
 <p>此外要注意的是, 虽然有<code>import</code>语法用来做显式引用(而且使用UVM的时候就是这么用的), 但是其实用<code>package_name::resource</code>的方式更安全. 比如说你的多个Package里面都定义了共用的枚举, 而这些枚举恰好有重名, 然后这些同名的枚举是不同的值, 这样你在用<code>import package_name::*;</code>的时候就可能会有枚举冲突, 而用<code>package_name::enum_item</code>这种格式就不会有问题. </p>
 <h1 id="使用编译时外部宏和运行时命令行参数实现验证平台的”多态”">使用编译时外部宏和运行时命令行参数实现验证平台的”多态”</h1>
@@ -184,9 +184,9 @@ Makefile中空变量的妙用
     </a>
   
   
-    <a href="/2015/04/28/note_others/perl_notes_on_learning_perl/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/02/28/note_emacs/keyswitch/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">《Learning PERL》笔记</div>
+      <div class="article-nav-title">一种同时适用于Vim和Emacs的改键方案</div>
     </a>
   
 </nav>
@@ -208,7 +208,7 @@ Makefile中空变量的妙用
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -228,7 +228,7 @@ Makefile中空变量的妙用
           </li>
         
           <li>
-            <a href="/2015/04/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
+            <a href="/2015/02/28/note_emacs/keyswitch/">一种同时适用于Vim和Emacs的改键方案</a>
           </li>
         
           <li>
@@ -236,7 +236,7 @@ Makefile中空变量的妙用
           </li>
         
           <li>
-            <a href="/2014/10/27/note_fpga/readmem/">$readmem是可综合的</a>
+            <a href="/2014/11/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
           </li>
         
       </ul>
