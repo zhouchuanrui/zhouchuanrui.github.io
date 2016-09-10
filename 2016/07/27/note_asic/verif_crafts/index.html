@@ -148,7 +148,7 @@ Makefile中空变量有大用
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">`ifndef <span class="constant">NO_DUMP</span></div><div class="line">initial <span class="symbol">begin:</span> dump_files</div><div class="line">    string <span class="keyword">fn</span>;</div><div class="line">    if(<span class="variable">$value</span><span class="variable">$plusargs</span>(<span class="string">"UVM_TESTNAME=%s"</span>, <span class="keyword">fn</span>))</div><div class="line">        <span class="keyword">fn</span> = {<span class="keyword">fn</span>, <span class="string">".fsdb"</span>};</div><div class="line">    else</div><div class="line">        <span class="keyword">fn</span> = <span class="string">"test.fsdb"</span>;</div><div class="line">    <span class="comment">#0.1;</span></div><div class="line">    <span class="variable">$fsdbDumpfile</span>(<span class="keyword">fn</span>);</div><div class="line">    ...</div><div class="line"><span class="keyword">end</span></div><div class="line">`endif</div></pre></td></tr></table></figure>
 
 <p>直接使用<code>UVM_TESTNAME</code>这个用于<code>run_test</code>的这个value plusargs再加上<code>.fsdb</code>后缀拼接成文件名, 然后再dump, 实现了fsdb文件和testcase的绑定. 当然这里也可以用单独的value pulsagrs来指定fsdb文件名. 中间的<code>#0.1</code>延时是考虑到运行的时候有可能打错case的名字, 这个时候<code>run_test</code>先运行报错退出, 就不会生成错误的fsdb文件了.</p>
-<p>其他的诸如, 控制一个sequence的运行次数, 控制是否进行覆盖率采集, 控制scoreboard的信息输出到STD还是文件等, 都可以用自定义的plusargs方便的实现. 这个比起定义不同的<code>uvm_test</code>使用<code>config_class</code>来生成不同的验证平台来, 要方便多了.</p>
+<p>其他的诸如, 控制一个sequence的运行次数, 控制是否进行覆盖率采集, 控制scoreboard的信息输出到STDOUT还是文件等, 都可以用自定义的plusargs方便的实现. 这个比起定义不同的<code>uvm_test</code>使用<code>config_class</code>来生成不同的验证平台来, 要方便多了.</p>
 <p>除了plusargs之外, 宏也是实现更改验证平台行为的一大利器. 注意到第一行的<code>ifndef</code>编译预处理命令了吗? 也就是说编译时添加宏<code>+define+NO_DUMP</code>可以去掉这个initial块. 其实要实现控制dump波形文件的开关的话, 直接用<code>$test$plusargs</code>才是更好的方案:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">...</span></div><div class="line"><span class="comment">#0.1;</span></div><div class="line"><span class="keyword">if</span> (!$test$plusargs(<span class="string">"NO_DUMP"</span>)) begin</div><div class="line">    $fsdbDumpfile(fn);</div><div class="line">    <span class="keyword">...</span></div><div class="line">end</div><div class="line"><span class="keyword">...</span></div></pre></td></tr></table></figure>
 
@@ -184,9 +184,9 @@ Makefile中空变量有大用
     </a>
   
   
-    <a href="/2015/02/28/note_emacs/keyswitch/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/02/09/note_asic/sv_oop/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一种同时适用于Vim和Emacs的改键方案</div>
+      <div class="article-nav-title">Systemverilog的OOP相关语法特性来自于哪里</div>
     </a>
   
 </nav>
@@ -208,7 +208,7 @@ Makefile中空变量有大用
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -228,15 +228,15 @@ Makefile中空变量有大用
           </li>
         
           <li>
+            <a href="/2016/02/09/note_asic/sv_oop/">Systemverilog的OOP相关语法特性来自于哪里</a>
+          </li>
+        
+          <li>
             <a href="/2015/02/28/note_emacs/keyswitch/">一种同时适用于Vim和Emacs的改键方案</a>
           </li>
         
           <li>
             <a href="/2015/01/09/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑环境</a>
-          </li>
-        
-          <li>
-            <a href="/2014/11/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
           </li>
         
       </ul>

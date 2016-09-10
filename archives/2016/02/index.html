@@ -3,35 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>GPS的正确用法 | Central Perk</title>
+  <title>Archives: 2016/2 | Central Perk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC]
-GPS模块与NMEA-1800协议
-GPS模块的基本输入输出构成是：
-
-天线，用来接收GPS卫星信号：
-PPS输出；
-串口模块，用来配置模块的工作模式以及NMEA-1800码串口输出格式；">
-<meta property="og:type" content="article">
-<meta property="og:title" content="GPS的正确用法">
-<meta property="og:url" content="http://yoursite.com/2013/09/23/note_scholar/hugps/">
+  <meta name="description" content="Ignorance is a rare rare blessing~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Central Perk">
+<meta property="og:url" content="http://yoursite.com/archives/2016/02/">
 <meta property="og:site_name" content="Central Perk">
-<meta property="og:description" content="[TOC]
-GPS模块与NMEA-1800协议
-GPS模块的基本输入输出构成是：
-
-天线，用来接收GPS卫星信号：
-PPS输出；
-串口模块，用来配置模块的工作模式以及NMEA-1800码串口输出格式；">
+<meta property="og:description" content="Ignorance is a rare rare blessing~">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GPS的正确用法">
-<meta name="twitter:description" content="[TOC]
-GPS模块与NMEA-1800协议
-GPS模块的基本输入输出构成是：
-
-天线，用来接收GPS卫星信号：
-PPS输出；
-串口模块，用来配置模块的工作模式以及NMEA-1800码串口输出格式；">
+<meta name="twitter:title" content="Central Perk">
+<meta name="twitter:description" content="Ignorance is a rare rare blessing~">
 
   
     <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
@@ -89,210 +71,39 @@ PPS输出；
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-note_scholar/hugps" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/09/23/note_scholar/hugps/" class="article-date">
-  <time datetime="2013-09-23T07:53:19.000Z" itemprop="datePublished">Sep 23 2013</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      GPS的正确用法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/02/09/note_asic/sv_oop/" class="archive-article-date">
+  <time datetime="2016-02-09T13:18:52.000Z" itemprop="datePublished">Feb 9</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/02/09/note_asic/sv_oop/">Systemverilog的OOP相关语法特性来自于哪里</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="GPS模块与NMEA-1800协议">GPS模块与NMEA-1800协议</h1>
-<p>GPS模块的基本输入输出构成是：</p>
-<ul>
-<li>天线，用来接收GPS卫星信号：</li>
-<li>PPS输出；</li>
-<li>串口模块，用来配置模块的工作模式以及NMEA-1800码串口输出格式；</li>
-</ul>
-<a id="more"></a>
-
-<p>NMEA-1800协议包含丰富的字段，具体有1.0版本支持的字段有：</p>
-<table>
-<thead>
-<tr>
-<th>字段名</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AAM</td>
-<td>Waypoint Arrival Alarm </td>
-</tr>
-<tr>
-<td>ALM</td>
-<td>Almanac data </td>
-</tr>
-<tr>
-<td>APA</td>
-<td>Auto Pilot A sentence </td>
-</tr>
-<tr>
-<td>APB</td>
-<td>Auto Pilot B sentence </td>
-</tr>
-<tr>
-<td>BOD</td>
-<td>Bearing Origin to Destination </td>
-</tr>
-<tr>
-<td>BWC</td>
-<td>Bearing using Great Circle route </td>
-</tr>
-<tr>
-<td>DTM</td>
-<td>Datum being used. </td>
-</tr>
-<tr>
-<td>GGA</td>
-<td>Fix information </td>
-</tr>
-<tr>
-<td>GLL</td>
-<td>Lat/Lon data </td>
-</tr>
-<tr>
-<td>GRS</td>
-<td>GPS Range Residuals </td>
-</tr>
-<tr>
-<td>GSA</td>
-<td>Overall Satellite data </td>
-</tr>
-<tr>
-<td>GST</td>
-<td>GPS Pseudorange Noise Statistics </td>
-</tr>
-<tr>
-<td>GSV</td>
-<td>Detailed Satellite data </td>
-</tr>
-<tr>
-<td>MSK</td>
-<td>send control for a beacon receiver </td>
-</tr>
-<tr>
-<td>MSS</td>
-<td>Beacon receiver status information. </td>
-</tr>
-<tr>
-<td>RMA</td>
-<td>recommended Loran data </td>
-</tr>
-<tr>
-<td>RMB</td>
-<td>recommended navigation data for gps </td>
-</tr>
-<tr>
-<td>RMC</td>
-<td>recommended minimum data for gps </td>
-</tr>
-<tr>
-<td>RTE</td>
-<td>route message </td>
-</tr>
-<tr>
-<td>TRF</td>
-<td>Transit Fix Data </td>
-</tr>
-<tr>
-<td>STN</td>
-<td>Multiple Data ID </td>
-</tr>
-<tr>
-<td>VBW</td>
-<td>dual Ground / Water Spped </td>
-</tr>
-<tr>
-<td>VTG</td>
-<td>Vector track an Speed over the Ground </td>
-</tr>
-<tr>
-<td>WCV</td>
-<td>Waypoint closure velocity (Velocity Made Good) </td>
-</tr>
-<tr>
-<td>WPL</td>
-<td>Waypoint Location information </td>
-</tr>
-<tr>
-<td>XTC</td>
-<td>cross track error </td>
-</tr>
-<tr>
-<td>XTE</td>
-<td>measured cross track error </td>
-</tr>
-<tr>
-<td>ZDA</td>
-<td>Date and Time</td>
-</tr>
-</tbody>
-</table>
-<p>里面可以获取时间信息、卫星信号信息、经纬度地理位置信息、卫星速度信息等，协议直接有冗余部分，用哪个字段要看具体的应用场合。</p>
-<h1 id="只用ZDA是不对的">只用ZDA是不对的</h1>
-<p>对时间同步的应用场合来讲，时间码是最重要的信息，因此ZDA字段是一定要的，ZDA字段的内容为：</p>
-<pre><code><span class="variable">$GPZDA</span>,hhmmss.ss,dd,mm,yyyy,xx,yy*CC
-</code></pre><p>内容非常简单，但是是NMEA-1800里面唯一包含了年份编码的字段。</p>
-<p>看起来用ZDA字段就已经满足了时间同步系统的时间源需求了。但是实际情况没这么简单。</p>
-<p>之前把一个GPS模块设为只有ZDA格式输出，不接天线的时候输出是：</p>
-<pre><code>$GPZDA,,,,,,*CC
-</code></pre><p>这个很好理解，没有接到GPS信号的嘛，然后接了天线，ZDA时间码很快就出来了。当时以为这个时候时间就已经准了，但是用仪器一对模块的PPS输出，发现偏的很大，跟之前没接天线的时候差不多，然后仔细一看时间码，跟标准时间还差着10多秒呢。</p>
-<p>后来，问了一个业内人士，才知道了问题所在。他说的是，ZDA时间出来的时候，GPS模块不一定就已经锁定了卫星信号了，因此还不一定是准确的时间。</p>
-<p>按这个来说，ZDA字段是不能单独使用的，因为这个字段里面没有GPS模块锁星的信息。其实说起来，ZDA可能是NMEA-1800里面最不重要的字段了，没有最核心的信息，只是比其他字段的UTC时间码多了年份码。</p>
-<p>因此，正确的使用方式是，<strong>要把ZDA跟其他字段配合起来使用，比如GGA、RMC或者GSA，要在这些字段里面读到卫星锁定了，才能去用ZDA里面的时间信息，这样才能保证时间码和PPS信号的正确</strong>。像是那些时间仪器里面一般都显示了GPS卫星数量，这些仪器里面肯定也是用了ZDA之外的字段的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2013/09/23/note_scholar/hugps/" data-id="nu27bd1284qyurt0" class="article-share-link" data-share="baidu">Share</a>
-      
-
-      
-
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2013/10/17/note_emacs/many_languages/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          编程语言的新体会
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2013/09/04/note_fpga/trifreq/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">3倍数字分频器</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
+  
+  
+    </div></section>
+  
 </section>
         
           <aside id="sidebar">

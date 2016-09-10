@@ -173,6 +173,61 @@
 
 
   
+    <article id="post-note_asic/sv_oop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/09/note_asic/sv_oop/" class="article-date">
+  <time datetime="2016-02-09T13:18:52.000Z" itemprop="datePublished">Feb 9 2016</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/09/note_asic/sv_oop/">Systemverilog的OOP相关语法特性来自于哪里</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>Systemverilog的语法内容非常丰富. 个人认为, Systemverilog的语法除了一些基础语法元素之外, 可以明显的分成四个部分: 与Verilog兼容的RTL部分, 断言(SVA)部分, 功能覆盖率(FC)部分和面向对象(OOP)部分.</p>
+<p>其中OOP部分作为各种验证方法学的基础, 是Systemverilog中最重要的内容了. Verilog跟Systemverilog的关系, 很容易让人联想到C跟C++的关系, 那是不是Systemverilog的OOP语法是来自于C++的呢? </p>
+<p>其实说起来, Systemverilog的OOP相关语法中最显眼的部分是来自于Java的:</p>
+<ul>
+<li>单继承和继承的形式<code>extends</code>, 类接口<code>interface</code>这些跟Java是完全一致的. </li>
+<li>然后是泛型(也就是参数化类), 只是语言格式上有一点点不一样. C++也是有泛型的, 不过C++里面叫模版, 而且还支持函数的泛型(模版函数), 所以这个部分来讲还是可以认为是Java的语法.</li>
+<li>最后是自动垃圾回收, 这个其实不能说是来自于Java, 现在的常用语言里还需要程序员手动管理内存释放的恐怕只剩C/C++了, 由于这个特性是C++所不具备的, 那就算到Java头上吧:)</li>
+</ul>
+<p>上面几点来看, Systemverilog的OOP似乎跟C++已经完全没有关系了, 不过也不是这样的, Systemverilog中来自于C++的特性也不少:</p>
+<ul>
+<li>基于virtual的动态绑定, 也就是说使用virtual关键字的方法才是动态绑定方法, 不像Java里面默认的方法都是动态绑定方法. 这个是个比较重要的多态行为.</li>
+<li>其他的一些小语法元素, 比如类作用域操作符<code>::</code>, 方法的<code>extern</code>实现, 静态成员和方法的访问形式等.</li>
+</ul>
+<p>所以总的说来, Systemverilog的OOP语法特性可以看作是Java和C++的结合体, 对Systemverilog的OOP语法有疑问的话可能需要从Java和C++中分别去找答案.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/02/09/note_asic/sv_oop/" data-id="uzqla5iz5dwwwea2" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-note_emacs/keyswitch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/02/28/note_emacs/keyswitch/" class="article-date">
@@ -531,52 +586,6 @@
 
 
   
-    <article id="post-note_fpga/fsm_issue" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/01/16/note_fpga/fsm_issue/" class="article-date">
-  <time datetime="2014-01-16T13:35:01.000Z" itemprop="datePublished">Jan 16 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/01/16/note_fpga/fsm_issue/">状态机要注意异步输入信号</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近的项目里写了一个管脚信号滤波的模块，可以设置延迟参数，主要是想用来做一个自制协议的信号解码的前置滤波，里面的主体是这个状态机：</p>
-
-        
-          <p class="article-more-link">
-            <a href="/2014/01/16/note_fpga/fsm_issue/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2014/01/16/note_fpga/fsm_issue/" data-id="d5zsfm4jbj55c5yr" class="article-share-link" data-share="baidu">Share</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -596,7 +605,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -616,15 +625,15 @@
           </li>
         
           <li>
+            <a href="/2016/02/09/note_asic/sv_oop/">Systemverilog的OOP相关语法特性来自于哪里</a>
+          </li>
+        
+          <li>
             <a href="/2015/02/28/note_emacs/keyswitch/">一种同时适用于Vim和Emacs的改键方案</a>
           </li>
         
           <li>
             <a href="/2015/01/09/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑环境</a>
-          </li>
-        
-          <li>
-            <a href="/2014/11/28/note_others/perl_notes_on_learning_perl/">《Learning PERL》笔记</a>
           </li>
         
       </ul>
