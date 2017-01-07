@@ -3,34 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>终端时钟测试 | Central Perk</title>
+  <title>UVM源码探索之Factory(下篇) | Central Perk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="[TOC]
-问题描述
-现场出现的相关问题有：  
+到下篇的时候, 我们来探索一下UVM的Factory的另外一个主要功能, 那就是重载. 说起来, 重载功能跟Factory这个设计模式已经没有关系了. 而且, 这里的”重载”跟常见的重载的意义也不一样, 这里的重载准确的描述的话是类”替换”.
+在UVM里面使用重载的大致流程如下:
 
-终端对时不稳定，表现为终端对时完成发送波形会直接出现比较大的相角差；
-终端守时不稳定，表现为终端发送波形时会在较短时间内跑偏大相角差；">
+对需要重载的类使用uvm_*_util进行类型注册, 原始类和重载类都需要注册;
+设置重载, 设置原始类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="终端时钟测试">
-<meta property="og:url" content="http://yoursite.com/2013/08/28/note_scholar/osc_test/">
+<meta property="og:title" content="UVM源码探索之Factory(下篇)">
+<meta property="og:url" content="http://yoursite.com/2016/08/28/note_asic/uvm_factory_next/">
 <meta property="og:site_name" content="Central Perk">
 <meta property="og:description" content="[TOC]
-问题描述
-现场出现的相关问题有：  
+到下篇的时候, 我们来探索一下UVM的Factory的另外一个主要功能, 那就是重载. 说起来, 重载功能跟Factory这个设计模式已经没有关系了. 而且, 这里的”重载”跟常见的重载的意义也不一样, 这里的重载准确的描述的话是类”替换”.
+在UVM里面使用重载的大致流程如下:
 
-终端对时不稳定，表现为终端对时完成发送波形会直接出现比较大的相角差；
-终端守时不稳定，表现为终端发送波形时会在较短时间内跑偏大相角差；">
-<meta property="og:image" content="/article_pics/osc_cap.png">
-<meta property="og:image" content="/article_pics/osc_input.png">
+对需要重载的类使用uvm_*_util进行类型注册, 原始类和重载类都需要注册;
+设置重载, 设置原始类">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="终端时钟测试">
+<meta name="twitter:title" content="UVM源码探索之Factory(下篇)">
 <meta name="twitter:description" content="[TOC]
-问题描述
-现场出现的相关问题有：  
+到下篇的时候, 我们来探索一下UVM的Factory的另外一个主要功能, 那就是重载. 说起来, 重载功能跟Factory这个设计模式已经没有关系了. 而且, 这里的”重载”跟常见的重载的意义也不一样, 这里的重载准确的描述的话是类”替换”.
+在UVM里面使用重载的大致流程如下:
 
-终端对时不稳定，表现为终端对时完成发送波形会直接出现比较大的相角差；
-终端守时不稳定，表现为终端发送波形时会在较短时间内跑偏大相角差；">
+对需要重载的类使用uvm_*_util进行类型注册, 原始类和重载类都需要注册;
+设置重载, 设置原始类">
 
   
     <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
@@ -88,10 +86,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-note_scholar/osc_test" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-note_asic/uvm_factory_next" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2013/08/28/note_scholar/osc_test/" class="article-date">
-  <time datetime="2013-08-28T03:16:46.000Z" itemprop="datePublished">Aug 28 2013</time>
+    <a href="/2016/08/28/note_asic/uvm_factory_next/" class="article-date">
+  <time datetime="2016-08-27T16:00:00.000Z" itemprop="datePublished">Aug 28 2016</time>
 </a>
     
   </div>
@@ -102,7 +100,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      终端时钟测试
+      UVM源码探索之Factory(下篇)
     </h1>
   
 
@@ -111,76 +109,24 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>[TOC]</p>
-<h1 id="问题描述">问题描述</h1>
-<p>现场出现的相关问题有：  </p>
-<ul>
-<li>终端对时不稳定，表现为终端对时完成发送波形会直接出现比较大的相角差；</li>
-<li>终端守时不稳定，表现为终端发送波形时会在较短时间内跑偏大相角差；</li>
-</ul>
-<a id="more"></a>
+<p>到下篇的时候, 我们来探索一下UVM的Factory的另外一个主要功能, 那就是重载. 说起来, 重载功能跟Factory这个设计模式已经没有关系了. 而且, 这里的”重载”跟常见的重载的意义也不一样, 这里的重载准确的描述的话是类”替换”.</p>
+<p>在UVM里面使用重载的大致流程如下:</p>
+<ol>
+<li>对需要重载的类使用<code>uvm_*_util</code>进行类型注册, 原始类和重载类都需要注册;</li>
+<li>设置重载, 设置原始类”替换”为重载类;</li>
+<li>使用Factory的<code>create</code>创建原始类对象, 返回的是重载类对象.</li>
+</ol>
+<p>步骤1我们在上篇已经讲过了, 步骤2跟3的在上篇其实也有相关的代码展示, 不过我们略过了. 现在到了下篇, 我们的主要任务就是把上面流程中的2跟3的源码实现给搞清楚.</p>
+<h1 id="重载的设置">重载的设置</h1>
+<p>在上篇, <code>uvm_object_registry</code>的类定义里面有这样的代码:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> uvm_object_registry #(type T=uvm_object, <span class="built_in">string</span> Tname=<span class="string">"&lt;unknown&gt;"</span>)</div><div class="line">                                        extends uvm_object_wrapper;</div><div class="line">    ...</div><div class="line">  static <span class="keyword">function</span> void set_type_override (uvm_object_wrapper override_type,</div><div class="line">                                          bit <span class="built_in">replace</span>=<span class="number">1</span>);</div><div class="line">    uvm_coreservice_t cs = uvm_coreservice_t::<span class="keyword">get</span>();</div><div class="line">    uvm_factory factory=cs.get_factory();</div><div class="line">    factory.set_type_override_by_type(<span class="keyword">get</span>(),override_type,<span class="built_in">replace</span>);</div><div class="line">  endfunction</div><div class="line"></div><div class="line">  static <span class="keyword">function</span> void set_inst_override(uvm_object_wrapper override_type,</div><div class="line">                                         <span class="built_in">string</span> inst_path,</div><div class="line">                                         uvm_component parent=<span class="literal">null</span>);</div><div class="line">    <span class="built_in">string</span> full_inst_path;</div><div class="line">    uvm_coreservice_t cs = uvm_coreservice_t::<span class="keyword">get</span>();</div><div class="line">    uvm_factory factory=cs.get_factory();</div><div class="line">    <span class="keyword">if</span> (parent != <span class="literal">null</span>) begin</div><div class="line">      <span class="keyword">if</span> (inst_path == <span class="string">""</span>)</div><div class="line">        inst_path = parent.get_full_name();</div><div class="line">      <span class="keyword">else</span></div><div class="line">        inst_path = {parent.get_full_name(),<span class="string">"."</span>,inst_path};</div><div class="line">    <span class="keyword">end</span></div><div class="line">    factory.set_inst_override_by_type(<span class="keyword">get</span>(),override_type,inst_path);</div><div class="line">  endfunction</div><div class="line">endclass</div></pre></td></tr></table></figure>
 
-<h1 id="实验环境描述">实验环境描述</h1>
-<ul>
-<li>终端三台，编号为103、107和110；</li>
-<li>主机一台，为现场所使用主机；</li>
-<li>实验场地为温箱实验室，用于模拟现场环境；</li>
-<li>使用仪器：功率分析仪、时间同步校验仪</li>
-</ul>
-<h1 id="实验方案">实验方案</h1>
-<p>将三台终端置于温箱内，引出信号输出线与pps输出线。三台终端下入FPGA的监控程序，并将调试口引出用于观测状态。实验时用主机发送50V的信号，然后将温箱温度设置为45度进行加温。</p>
-<h1 id="实验现象观察">实验现象观察</h1>
-<h2 id="终端时钟部分">终端时钟部分</h2>
-<p>三台终端下入FPGA程序，三台终端用逻辑分析仪看到的参数为：</p>
-<table>
-<thead>
-<tr>
-<th>终端</th>
-<th>常规计数值</th>
-<th>边界计数值</th>
-<th>计数周期</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>110</td>
-<td>999999020</td>
-<td>999999040</td>
-<td>1</td>
-</tr>
-<tr>
-<td>103</td>
-<td>999999380</td>
-<td>999999400</td>
-<td>3</td>
-</tr>
-<tr>
-<td>107</td>
-<td>999999320</td>
-<td>999999300</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-<p>这个为正常的计数值。用时间同步校验仪观测pps信号也是稳定行良好。</p>
-<p>加热温箱一段时间后，用功率分析仪发现输出信号的相角出现偏差，然后用时间同步校验仪观测发现是103终端的pps出现问题，用逻辑分析以查看FPGA的晶振参数发现参数是变成了<code>1000020016|1000048859|3</code>。这就是造成相角偏差的原因了。</p>
-<p>根据系统的设计，晶振的修正参数只是在液晶的参数校正页面修改的，这个时候进入103终端的这个页面，发现晶振修正参数是正常的，这个时候再看Signal Tap的监测页发现参数已经恢复到正常值<code>1000020016|1000048859|3</code>了。</p>
-<p>继续实验，到出现问题的时候一看还是103的问题，出现的错乱参数还是<code>1000020016|1000048859|3</code>。</p>
-<p>继续实验，这次出现问题的终端是107，出现错乱参数依旧是<code>1000020016|1000048859|3</code>。</p>
-<p>根据这个现象可以初步认定是DSP的bug导致预期外的写操作，然后修改了晶振参数。</p>
-<p>此时用逻辑分析仪去抓取DSP的写触发，在103终端上抓取了记录：<br><img src="/article_pics/osc_cap.png" alt="Image Title"><br>值得注意的是这次并没有用温箱加温。</p>
-<p>这里可以对比在参数修改页面的时序记录：<br><img src="/article_pics/osc_input.png" alt="Image Title"></p>
-<h2 id="其他部分">其他部分</h2>
-<p>实验中110出现了另外的现象，就是加温时加到将近45度的时候Ua的输出会变为0，然后拿出来冷却一段时间，输出又会恢复。</p>
-<h1 id="现象总结与分析">现象总结与分析</h1>
-<p>通过实验现象与记录，可以认定是DSP程序出现了bug，晶振参数的改变就是引起现场使用时两个问题的原因。</p>
-<p>实验现象不常出现，需要仔细排查。从截图看应该是一个有规律性的操作，目前可以预测应该是外部总线操作XINTF方面的问题。</p>
-<p>可用的一个备选解决方案是强化一下晶振参数修改的接口，制造一个软件锁来防止误操作。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2013/08/28/note_scholar/osc_test/" data-id="ssftj2uky8l27nvy" class="article-share-link" data-share="baidu">Share</a>
+        <a data-url="http://yoursite.com/2016/08/28/note_asic/uvm_factory_next/" data-id="jem7dh7wnyjgpmpr" class="article-share-link" data-share="baidu">Share</a>
       
 
       
@@ -192,19 +138,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2013/08/28/note_vim/ncpc/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          neocomplcache这个插件。。。
-        
-      </div>
-    </a>
   
-  
-    <a href="/2013/08/28/note_fpga/quartus_tabs/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/27/note_asic/uvm_factory/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Quartus标签页消失补救</div>
+      <div class="article-nav-title">UVM源码探索之Factory(上篇)</div>
     </a>
   
 </nav>

@@ -73,6 +73,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-note_asic/uvm_factory_next" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/28/note_asic/uvm_factory_next/" class="article-date">
+  <time datetime="2016-08-27T16:00:00.000Z" itemprop="datePublished">Aug 28 2016</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/28/note_asic/uvm_factory_next/">UVM源码探索之Factory(下篇)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>到下篇的时候, 我们来探索一下UVM的Factory的另外一个主要功能, 那就是重载. 说起来, 重载功能跟Factory这个设计模式已经没有关系了. 而且, 这里的”重载”跟常见的重载的意义也不一样, 这里的重载准确的描述的话是类”替换”.</p>
+<p>在UVM里面使用重载的大致流程如下:</p>
+<ol>
+<li>对需要重载的类使用<code>uvm_*_util</code>进行类型注册, 原始类和重载类都需要注册;</li>
+<li>设置重载, 设置原始类”替换”为重载类;</li>
+<li>使用Factory的<code>create</code>创建原始类对象, 返回的是重载类对象.</li>
+</ol>
+<p>步骤1我们在上篇已经讲过了, 步骤2跟3的在上篇其实也有相关的代码展示, 不过我们略过了. 现在到了下篇, 我们的主要任务就是把上面流程中的2跟3的源码实现给搞清楚.</p>
+<h1 id="重载的设置">重载的设置</h1>
+<p>在上篇, <code>uvm_object_registry</code>的类定义里面有这样的代码:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> uvm_object_registry #(type T=uvm_object, <span class="built_in">string</span> Tname=<span class="string">"&lt;unknown&gt;"</span>)</div><div class="line">                                        extends uvm_object_wrapper;</div><div class="line">    ...</div><div class="line">  static <span class="keyword">function</span> void set_type_override (uvm_object_wrapper override_type,</div><div class="line">                                          bit <span class="built_in">replace</span>=<span class="number">1</span>);</div><div class="line">    uvm_coreservice_t cs = uvm_coreservice_t::<span class="keyword">get</span>();</div><div class="line">    uvm_factory factory=cs.get_factory();</div><div class="line">    factory.set_type_override_by_type(<span class="keyword">get</span>(),override_type,<span class="built_in">replace</span>);</div><div class="line">  endfunction</div><div class="line"></div><div class="line">  static <span class="keyword">function</span> void set_inst_override(uvm_object_wrapper override_type,</div><div class="line">                                         <span class="built_in">string</span> inst_path,</div><div class="line">                                         uvm_component parent=<span class="literal">null</span>);</div><div class="line">    <span class="built_in">string</span> full_inst_path;</div><div class="line">    uvm_coreservice_t cs = uvm_coreservice_t::<span class="keyword">get</span>();</div><div class="line">    uvm_factory factory=cs.get_factory();</div><div class="line">    <span class="keyword">if</span> (parent != <span class="literal">null</span>) begin</div><div class="line">      <span class="keyword">if</span> (inst_path == <span class="string">""</span>)</div><div class="line">        inst_path = parent.get_full_name();</div><div class="line">      <span class="keyword">else</span></div><div class="line">        inst_path = {parent.get_full_name(),<span class="string">"."</span>,inst_path};</div><div class="line">    <span class="keyword">end</span></div><div class="line">    factory.set_inst_override_by_type(<span class="keyword">get</span>(),override_type,inst_path);</div><div class="line">  endfunction</div><div class="line">endclass</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/08/28/note_asic/uvm_factory_next/" data-id="jem7dh7wnyjgpmpr" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-note_asic/uvm_factory" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/27/note_asic/uvm_factory/" class="article-date">
@@ -196,7 +249,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>[TOC]</p>
-<p>Systemverilog的语法内容非常丰富. 个人认为, Systemverilog的语法除了一些基础语法元素之外, 可以明显的分成四个部分: 与Verilog兼容的RTL部分, 断言(SVA)部分, 功能覆盖率(FC)部分和面向对象(OOP)部分.</p>
+<p>Systemverilog的语法内容非常丰富. 一般认为, Systemverilog的语法除了一些基础语法元素之外, 可以明显的分成四个部分: 与Verilog兼容的RTL部分, 断言(SVA)部分, 功能覆盖率(FC)部分和面向对象(OOP)部分.</p>
 <p>其中OOP部分作为各种验证方法学的基础, 是Systemverilog中最重要的内容了. Verilog跟Systemverilog的关系, 很容易让人联想到C跟C++的关系, 再加上verilog的基础语法部分基本都是C语言里的(把<code>begin-end</code>换成大括号), 那是不是Systemverilog的OOP语法特性是来自于C++的呢? </p>
 
         
@@ -530,55 +583,6 @@
 
 
   
-    <article id="post-note_fpga/gndbnc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/01/17/note_fpga/gndbnc/" class="article-date">
-  <time datetime="2014-01-17T03:02:33.000Z" itemprop="datePublished">Jan 17 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/01/17/note_fpga/gndbnc/">FPGA怎么抑制地弹</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="什么是地弹">什么是地弹</h1>
-<p>芯片的管脚与地之间有寄生电感，然后芯片的输出信号切换的时候，流到地端的电流产生突变，这样会在寄生电感上面产生压降。这个就是地弹。</p>
-<p>地弹的大小由两个因素决定，一个就是寄生电感的大小，电感越大地弹就越大；另外一个就是信号切换的频率，信号切换的频率越大地弹的发生的频率也越大，特别是多个管脚信号（就比如数据总线）同时切换的时候这个地弹就很大了。</p>
-
-        
-          <p class="article-more-link">
-            <a href="/2014/01/17/note_fpga/gndbnc/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2014/01/17/note_fpga/gndbnc/" data-id="846a7w0otwyqxh21" class="article-share-link" data-share="baidu">Share</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -598,7 +602,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -608,6 +612,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/28/note_asic/uvm_factory_next/">UVM源码探索之Factory(下篇)</a>
+          </li>
         
           <li>
             <a href="/2016/08/27/note_asic/uvm_factory/">UVM源码探索之Factory(上篇)</a>
@@ -623,10 +631,6 @@
         
           <li>
             <a href="/2015/02/28/note_emacs/keyswitch/">一种同时适用于Vim和Emacs的改键方案</a>
-          </li>
-        
-          <li>
-            <a href="/2015/01/09/note_emacs/writing_verilog/">我的Verilog HDL代码快速编辑环境</a>
           </li>
         
       </ul>
@@ -656,7 +660,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 Mr.Zhou<br>
+      &copy; 2017 Mr.Zhou<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
