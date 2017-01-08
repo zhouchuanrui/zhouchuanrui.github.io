@@ -95,9 +95,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>UVM的Commandline Processor出现在源码文档的倒数第二章, 而最后一章的标题是”GLOBALS”, 也就是说UVM Command Processor是源码文档中的最后一个主题类.</p>
+        <p>UVM的CLP(Commandline Processor)出现在源码文档的倒数第二章, 而最后一章的标题是”GLOBALS”, 也就是说UVM Command Processor是源码文档中的最后一个主题类.</p>
 <p>这个类从字面上来看, 是处理仿真器的命令行参数的. 在看到这个类的时候, 我的直觉是这个类会不会是用SV的<code>$plusargs</code>实现的. 这次就来探索一下这个类吧.</p>
-<h1 id="UVM_Commandline_Processor的API">UVM Commandline Processor的API</h1>
+<h1 id="CLP的API">CLP的API</h1>
 <p>这些内容都是文档里面直接给出的, 先是基本对象接口:</p>
 <table>
 <thead>
