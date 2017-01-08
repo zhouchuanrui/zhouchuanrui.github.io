@@ -117,8 +117,75 @@ UVM Commandline Pr">
 </tr>
 </tbody>
 </table>
+<p>表明这个类是个单例类, 这个好理解, 因为命令行的处理只需要做一次, 得到的参数保留一份就够了.</p>
 <a id="more"></a>
 
+<p>接下来是基本功能接口:</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_args</code></td>
+<td>This function returns a queue with all of the command line arguments that were used to start the simulation.</td>
+</tr>
+<tr>
+<td><code>get_plusargs</code></td>
+<td>This function returns a queue with all of the plus arguments that were used to start the simulation.</td>
+</tr>
+<tr>
+<td><code>get_uvmargs</code></td>
+<td>This function returns a queue with all of the uvm arguments that were used to start the simulation.</td>
+</tr>
+<tr>
+<td><code>get_arg_matches</code></td>
+<td>This function loads a queue with all of the arguments that match the input expression and returns the number of items that matched. </td>
+</tr>
+</tbody>
+</table>
+<p>看描述的话, 这个类可以把所有的参数都提取出来呢, 而<code>$plusargs</code>是参数格式要求的, 也就是<code>+</code>开头的参数才能读取. 然后这个类提供了<code>get_arg_matches</code>这个字符串匹配接口, 看来不是<code>$plusargs</code>所能轻易做到的.</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_arg_value</code></td>
+<td>This function finds the first argument which matches the match arg and returns the suffix of the argument.</td>
+</tr>
+<tr>
+<td><code>get_arg_values</code></td>
+<td>This function finds all the arguments which matches the match arg and returns the suffix of the arguments in a list of values. </td>
+</tr>
+</tbody>
+</table>
+<p>这两个API是用来获取参数值的, 参数值的保存跟取值需要分开操作.</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_tool_name</code></td>
+<td>Returns the simulation tool that is executing the simulation.</td>
+</tr>
+<tr>
+<td><code>get_tool_version</code></td>
+<td>Returns the version of the simulation tool that is executing the simulation. </td>
+</tr>
+</tbody>
+</table>
+<p>这两个API返回仿真器的信息, 看来UVM的代码果然还是跟仿真器相关的.</p>
 
       
     </div>
