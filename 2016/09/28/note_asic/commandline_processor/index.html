@@ -239,13 +239,27 @@ UVM Commandline Pr">
 <td><code>+UVM_CONFIG_DB_TRACE</code></td>
 <td><code>+UVM_CONFIG_DB_TRACE turns on tracing of configuration DB access.</code></td>
 </tr>
+<tr>
+<td><code>+uvm_set_inst_override, +uvm_set_type_override</code></td>
+<td><code>+uvm_set_inst_override=&lt;req_type&gt;,&lt;override_type&gt;,&lt;full_inst_path&gt; and +uvm_set_type_override=&lt;req_type&gt;,&lt;override_type&gt;[,&lt;replace&gt;] work like the name based overrides in the factory--factory.set_inst_override_by_name() and factory.set_type_override_by_name().</code></td>
+</tr>
+<tr>
+<td><code>+uvm_set_config_int, +uvm_set_config_string</code></td>
+<td><code>+uvm_set_config_int=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; and +uvm_set_config_string=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; work like their procedural counterparts: set_config_int() and set_config_string().</code></td>
+</tr>
+<tr>
+<td><code>+uvm_set_default_sequence</code></td>
+<td><code>The +uvm_set_default_sequence=&lt;seqr&gt;,&lt;phase&gt;,&lt;type&gt; plusarg allows the user to define a default sequence from the command line, using the typename of that sequence.</code></td>
+</tr>
 </tbody>
 </table>
-<p><code>+uvm_set_inst_override    
-+uvm_set_type_override</code>|<code>+uvm_set_inst_override=&lt;req_type&gt;,&lt;override_type&gt;,&lt;full_inst_path&gt; and +uvm_set_type_override=&lt;req_type&gt;,&lt;override_type&gt;[,&lt;replace&gt;] work like the name based overrides in the factory--factory.set_inst_override_by_name() and factory.set_type_override_by_name().</code><br><code>+uvm_set_config_int    
-+uvm_set_config_string</code>|<code>+uvm_set_config_int=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; and +uvm_set_config_string=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; work like their procedural counterparts: set_config_int() and set_config_string().</code><br><code>+uvm_set_default_sequence</code>|<code>The +uvm_set_default_sequence=&lt;seqr&gt;,&lt;phase&gt;,&lt;type&gt; plusarg allows the user to define a default sequence from the command line, using the typename of that sequence.</code></p>
-<p>可以看出</p>
-<h1 id="UVM_Commandline_Processor的API-1">UVM Commandline Processor的API</h1>
+<p>可以看出内置参数都是<code>+uvm</code>或<code>+UVM</code>开头的, 其实说起来用<code>$plusargs</code>也是可以的. </p>
+<h1 id="UVM_Commandline_Processor源码">UVM Commandline Processor源码</h1>
+<p>接着我们来看看UVM Commandline Processor的源码罢, 看看这家伙是怎么实现的.</p>
+<p>UVM Commandline Processor的源码文档位置在<code>src/base/uvm_cmdline_processor.svh</code>, 没多少行的.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">uvm_cmdline_processor</span> <span class="keyword">extends</span> <span class="title">uvm_report_object</span>;</span></div><div class="line"></div><div class="line">  static local uvm_cmdline_processor m_inst;</div><div class="line"></div><div class="line">  <span class="comment">// Group: Singleton </span></div><div class="line"></div><div class="line">  <span class="comment">// Function: get_inst</span></div><div class="line">  <span class="comment">//</span></div><div class="line">  <span class="comment">// Returns the singleton instance of the UVM command line processor.</span></div><div class="line"></div><div class="line">  static function uvm_cmdline_processor get_inst();</div><div class="line">    <span class="keyword">if</span>(m_inst == <span class="keyword">null</span>) </div><div class="line">      m_inst = <span class="keyword">new</span>(<span class="string">"uvm_cmdline_proc"</span>);</div><div class="line">    <span class="keyword">return</span> m_inst;</div><div class="line">  endfunction</div><div class="line">    ...</div></pre></td></tr></table></figure>
+
+<p>上面这个就是</p>
 
       
     </div>
