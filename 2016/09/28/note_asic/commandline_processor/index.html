@@ -186,6 +186,64 @@ UVM Commandline Pr">
 </tbody>
 </table>
 <p>这两个API返回仿真器的信息, 看来UVM的代码果然还是跟仿真器相关的.</p>
+<p>然后是UVM里面所有的内置运行时参数:</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+UVM_TESTNAME</code></td>
+<td><code>+UVM_TESTNAME=&lt;class name&gt; allows the user to specify which uvm_test (or uvm_component) should be created via the factory and cycled through the UVM phases.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_VERBOSITY</code></td>
+<td><code>+UVM_VERBOSITY=&lt;verbosity&gt; allows the user to specify the initial verbosity for all components.</code></td>
+</tr>
+<tr>
+<td><code>+uvm_set_verbosity</code></td>
+<td><code>+uvm_set_verbosity=&lt;comp&gt;,&lt;id&gt;,&lt;verbosity&gt;,&lt;phase&gt; and +uvm_set_verbosity=&lt;comp&gt;,&lt;id&gt;,&lt;verbosity&gt;,time,&lt;time&gt; allow the users to manipulate the verbosity of specific components at specific phases (and times during the “run” phases) of the simulation.</code></td>
+</tr>
+<tr>
+<td><code>+uvm_set_action</code></td>
+<td><code>+uvm_set_action=&lt;comp&gt;,&lt;id&gt;,&lt;severity&gt;,&lt;action&gt; provides the equivalent of various uvm_report_object’s set_report_*_action APIs.</code></td>
+</tr>
+<tr>
+<td><code>+uvm_set_severity</code></td>
+<td><code>+uvm_set_severity=&lt;comp&gt;,&lt;id&gt;,&lt;current severity&gt;,&lt;new severity&gt; provides the equivalent of the various uvm_report_object’s set_report_*_severity_override APIs.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_TIMEOUT</code></td>
+<td><code>+UVM_TIMEOUT=&lt;timeout&gt;,&lt;overridable&gt; allows users to change the global timeout of the UVM framework.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_MAX_QUIT_COUNT</code></td>
+<td><code>+UVM_MAX_QUIT_COUNT=&lt;count&gt;,&lt;overridable&gt; allows users to change max quit count for the report server.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_PHASE_TRACE</code></td>
+<td><code>+UVM_PHASE_TRACE turns on tracing of phase executions.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_OBJECTION_TRACE</code></td>
+<td><code>+UVM_OBJECTION_TRACE turns on tracing of objection activity.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_RESOURCE_DB_TRACE</code></td>
+<td><code>+UVM_RESOURCE_DB_TRACE turns on tracing of resource DB access.</code></td>
+</tr>
+<tr>
+<td><code>+UVM_CONFIG_DB_TRACE</code></td>
+<td><code>+UVM_CONFIG_DB_TRACE turns on tracing of configuration DB access.</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>+uvm_set_inst_override</code>|<code>+uvm_set_type_override    +uvm_set_inst_override=&lt;req_type&gt;,&lt;override_type&gt;,&lt;full_inst_path&gt; and +uvm_set_type_override=&lt;req_type&gt;,&lt;override_type&gt;[,&lt;replace&gt;] work like the name based overrides in the factory--factory.set_inst_override_by_name() and factory.set_type_override_by_name().</code><br><code>+uvm_set_config_int</code>|<code>+uvm_set_config_string    +uvm_set_config_int=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; and +uvm_set_config_string=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; work like their procedural counterparts: set_config_int() and set_config_string().</code><br><code>+uvm_set_default_sequence</code>|<code>The +uvm_set_default_sequence=&lt;seqr&gt;,&lt;phase&gt;,&lt;type&gt; plusarg allows the user to define a default sequence from the command line, using the typename of that sequence.</code></p>
+<p>可以看出</p>
+<h1 id="UVM_Commandline_Processor的API-1">UVM Commandline Processor的API</h1>
 
       
     </div>
