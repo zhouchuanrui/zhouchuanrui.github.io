@@ -3,26 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NERDCommenter | Central Perk</title>
+  <title>UVM Commandline Processor | Central Perk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC]
-介绍
-这是一个非常简洁清新的插件，简洁到不需要在_vimrc里面做任何的配置，非常的不错。
-插件的功能是实现代码的快速注释和反注释，说实话是相当基础的一个功能。我之前用过很长时间的notepad++，里面注释是Ctrl+q，多行注释就是先选多行然后再Ctrl+q，而且Ctrl+q其实是翻转注释，用起来风骚的紧。Vim里面没有自带的智能注释操作，才让我越发的想弄一个来。">
+  <meta name="description" content="UVM的Commandline Processor出现在源码文档的倒数第二章, 而最后一章的标题是”GLOBALS”, 也就是说UVM Command Processor是源码文档中的最后一个主题类.
+这个类从字面上来看, 是处理仿真器的命令行参数的. 在看到这个类的时候, 我的直觉是这个类会不会是用SV的$plusargs实现的. 这次就来探索一下这个类吧.
+UVM Commandline Pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NERDCommenter">
-<meta property="og:url" content="http://yoursite.com/2013/08/28/note_vim/nerdcomment/">
+<meta property="og:title" content="UVM Commandline Processor">
+<meta property="og:url" content="http://yoursite.com/2016/09/28/note_asic/commandline_processor/">
 <meta property="og:site_name" content="Central Perk">
-<meta property="og:description" content="[TOC]
-介绍
-这是一个非常简洁清新的插件，简洁到不需要在_vimrc里面做任何的配置，非常的不错。
-插件的功能是实现代码的快速注释和反注释，说实话是相当基础的一个功能。我之前用过很长时间的notepad++，里面注释是Ctrl+q，多行注释就是先选多行然后再Ctrl+q，而且Ctrl+q其实是翻转注释，用起来风骚的紧。Vim里面没有自带的智能注释操作，才让我越发的想弄一个来。">
+<meta property="og:description" content="UVM的Commandline Processor出现在源码文档的倒数第二章, 而最后一章的标题是”GLOBALS”, 也就是说UVM Command Processor是源码文档中的最后一个主题类.
+这个类从字面上来看, 是处理仿真器的命令行参数的. 在看到这个类的时候, 我的直觉是这个类会不会是用SV的$plusargs实现的. 这次就来探索一下这个类吧.
+UVM Commandline Pr">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NERDCommenter">
-<meta name="twitter:description" content="[TOC]
-介绍
-这是一个非常简洁清新的插件，简洁到不需要在_vimrc里面做任何的配置，非常的不错。
-插件的功能是实现代码的快速注释和反注释，说实话是相当基础的一个功能。我之前用过很长时间的notepad++，里面注释是Ctrl+q，多行注释就是先选多行然后再Ctrl+q，而且Ctrl+q其实是翻转注释，用起来风骚的紧。Vim里面没有自带的智能注释操作，才让我越发的想弄一个来。">
+<meta name="twitter:title" content="UVM Commandline Processor">
+<meta name="twitter:description" content="UVM的Commandline Processor出现在源码文档的倒数第二章, 而最后一章的标题是”GLOBALS”, 也就是说UVM Command Processor是源码文档中的最后一个主题类.
+这个类从字面上来看, 是处理仿真器的命令行参数的. 在看到这个类的时候, 我的直觉是这个类会不会是用SV的$plusargs实现的. 这次就来探索一下这个类吧.
+UVM Commandline Pr">
 
   
     <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
@@ -80,10 +77,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-note_vim/nerdcomment" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-note_asic/commandline_processor" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2013/08/28/note_vim/nerdcomment/" class="article-date">
-  <time datetime="2013-08-28T03:17:09.000Z" itemprop="datePublished">Aug 28 2013</time>
+    <a href="/2016/09/28/note_asic/commandline_processor/" class="article-date">
+  <time datetime="2016-09-27T16:00:00.000Z" itemprop="datePublished">Sep 28 2016</time>
 </a>
     
   </div>
@@ -94,7 +91,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NERDCommenter
+      UVM Commandline Processor
     </h1>
   
 
@@ -102,96 +99,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="介绍">介绍</h1>
-<p>这是一个非常简洁清新的插件，简洁到不需要在_vimrc里面做任何的配置，非常的不错。</p>
-<p>插件的功能是实现代码的快速注释和反注释，说实话是相当基础的一个功能。我之前用过很长时间的notepad++，里面注释是Ctrl+q，多行注释就是先选多行然后再Ctrl+q，而且Ctrl+q其实是翻转注释，用起来风骚的紧。Vim里面没有自带的智能注释操作，才让我越发的想弄一个来。</p>
-<a id="more"></a>
-
-<h1 id="使用">使用</h1>
-<p>NERDCommenter默认的键绑定是\<leader\>c再加一个后缀，c指的应该就是comment，还是比较合理的，也没跟_vimrc里面的有冲突。然后会在menubar里面增加选项，把所有的命令和快捷键都列上，这个其实很好，对快速的熟悉这些命令很有帮助。其实越来越觉得menubar是个好东西，对像我这样的新手而言，是很多设置的快速入口。</leader\></p>
-<p>这些命令都是在普通模式和可视模式下使用，普通模式下要实现多行的话就是要带个计数前缀，也是蛮直观的。</p>
-<h1 id="命令描述">命令描述</h1>
-<p>命令是只有10来条，直接列个表：</p>
+        <p>UVM的Commandline Processor出现在源码文档的倒数第二章, 而最后一章的标题是”GLOBALS”, 也就是说UVM Command Processor是源码文档中的最后一个主题类.</p>
+<p>这个类从字面上来看, 是处理仿真器的命令行参数的. 在看到这个类的时候, 我的直觉是这个类会不会是用SV的<code>$plusargs</code>实现的. 这次就来探索一下这个类吧.</p>
+<h1 id="UVM_Commandline_Processor的API">UVM Commandline Processor的API</h1>
+<p>这些内容都是文档里面直接给出的, 先是基本对象接口:</p>
 <table>
 <thead>
 <tr>
-<th>命令名</th>
-<th>键绑定</th>
-<th>介绍</th>
+<th>API</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>NERDComComment</td>
-<td>,cc</td>
-<td>招牌，实现注释</td>
-</tr>
-<tr>
-<td>NERDComNestedComment</td>
-<td>,cn</td>
-<td>层级注释，我推测是可以解决选中内容中已有注释的问题，但是实际上的效果跟,cc是一样的，目测是鸡肋</td>
-</tr>
-<tr>
-<td>NERDComToggleComment</td>
-<td>,c<space></space></td>
-<td>注释翻转，取第一行的注释状态作翻转来实现全部行的注释\反注释</td>
-</tr>
-<tr>
-<td>NERDComMinimalComment</td>
-<td>,cm</td>
-<td>最小注释，用的时候就是感觉单行也是用的多行注释包起来，目测鸡肋</td>
-</tr>
-<tr>
-<td>NERDComInvertComment</td>
-<td>,ci</td>
-<td>每行都是单独翻转注释状态，就是notepad++里面的Ctrl+q了</td>
-</tr>
-<tr>
-<td>NERDComSexyComment</td>
-<td>,cs</td>
-<td>sexy版注释，鸡肋</td>
-</tr>
-<tr>
-<td>NERDComYankComment</td>
-<td>,cy</td>
-<td>注释并且复制注释的内容，感觉在这个时候会想不起来用到复制功能</td>
-</tr>
-<tr>
-<td>NERDComEOLComment</td>
-<td>,c$</td>
-<td>望文生义，注释到行尾</td>
-</tr>
-<tr>
-<td>NERDComAppendComment</td>
-<td>,cA</td>
-<td>望文生义，在行尾插入注释并进入插入模式，对我来说这个很是实用</td>
-</tr>
-<tr>
-<td>NERDComAltDelim</td>
-<td>,ca</td>
-<td>切换注释的默认样式，就是统一用单行注释的样式或者多行注释的样式，当然只选行内一部分的代码的时候还是会用多行注释样式的，是让人困惑的指令，不碰为妙</td>
-</tr>
-<tr>
-<td>NERDComAlignedComment</td>
-<td>,cl和,cb</td>
-<td>对齐注释，l为左对齐，b为两端对齐，鸡肋</td>
-</tr>
-<tr>
-<td>NERDComUncommentLine</td>
-<td>,cu</td>
-<td>反注释</td>
+<td><code>get_inst</code></td>
+<td>Returns the singleton instance of the UVM command line processor.</td>
 </tr>
 </tbody>
 </table>
-<h1 id="总结">总结</h1>
-<p>虽然用这个也没多久，但是还是很看好NERDCommenter的，小巧干净好用，简直是插件之典范。</p>
+<a id="more"></a>
+
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2013/08/28/note_vim/nerdcomment/" data-id="xgspkrabmv1i0yp9" class="article-share-link" data-share="baidu">Share</a>
+        <a data-url="http://yoursite.com/2016/09/28/note_asic/commandline_processor/" data-id="ltk9zc393yrsaqe7" class="article-share-link" data-share="baidu">Share</a>
       
 
       
@@ -203,19 +136,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2013/08/28/note_vim/snipmate/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          好插件之snipmate
-        
-      </div>
-    </a>
   
-  
-    <a href="/2013/08/28/note_vim/ncpc/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/28/note_asic/uvm_factory_next/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">neocomplcache这个插件。。。</div>
+      <div class="article-nav-title">UVM源码探索之Factory(下篇)</div>
     </a>
   
 </nav>
