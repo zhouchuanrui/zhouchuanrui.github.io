@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一个工厂小demo实现UVM的run_test | Central Perk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="run_test是UVM的一大卖点. run_test根据运行时的参数+UVM_TESTNAME=[test_name]来例化[test_name]对应的继承自UVM_TEST的子类对象并运行, 把所有的用例一起编译之后, 就可以实现”一次编译, 多次运行”.
+说到UVM的Factory工厂, 大家的第一反应可能是Factory的create例化:
+12usr_obj = usr_ojbect_c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个工厂小demo实现UVM的run_test">
+<meta property="og:url" content="http://yoursite.com/2017/03/28/note_asic/run_test_demo/">
+<meta property="og:site_name" content="Central Perk">
+<meta property="og:description" content="run_test是UVM的一大卖点. run_test根据运行时的参数+UVM_TESTNAME=[test_name]来例化[test_name]对应的继承自UVM_TEST的子类对象并运行, 把所有的用例一起编译之后, 就可以实现”一次编译, 多次运行”.
+说到UVM的Factory工厂, 大家的第一反应可能是Factory的create例化:
+12usr_obj = usr_ojbect_c">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个工厂小demo实现UVM的run_test">
+<meta name="twitter:description" content="run_test是UVM的一大卖点. run_test根据运行时的参数+UVM_TESTNAME=[test_name]来例化[test_name]对应的继承自UVM_TEST的子类对象并运行, 把所有的用例一起编译之后, 就可以实现”一次编译, 多次运行”.
+说到UVM的Factory工厂, 大家的第一反应可能是Factory的create例化:
+12usr_obj = usr_ojbect_c">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Central Perk" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Central Perk</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Ignorance is a rare rare blessing~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-note_asic/run_test_demo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/28/note_asic/run_test_demo/" class="article-date">
+  <time datetime="2017-03-27T16:00:00.000Z" itemprop="datePublished">Mar 28 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一个工厂小demo实现UVM的run_test
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>run_test</code>是UVM的一大卖点. <code>run_test</code>根据运行时的参数<code>+UVM_TESTNAME=[test_name]</code>来例化<code>[test_name]</code>对应的继承自<code>UVM_TEST</code>的子类对象并运行, 把所有的用例一起编译之后, 就可以实现”一次编译, 多次运行”.</p>
+<p>说到UVM的Factory工厂, 大家的第一反应可能是Factory的<code>create</code>例化:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">usr_obj = usr_ojbect_class::type_id::create(<span class="string">"obj_name"</span>);</div><div class="line">usr_com = usr_com_class::type_id::create(<span class="string">"com_name"</span>, <span class="keyword">this</span>);</div></pre></td></tr></table></figure>
+
+<p>仔细看的话, 这种例化方式, 已经把对象的类型都写明了, 仍然是Hardcode硬编码的形式. 对比之下, <code>run_test</code>才是真正符合工厂模式内涵的动态行为.</p>
+<p>这里用一个轻量级的demo来展示UVM的工厂模式实现<code>run_test</code>这种行为的机制.</p>
+<a id="more"></a>
+
+<h1 id="核心部分代码">核心部分代码</h1>
+<p>demo代码的核心部分如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">virtual <span class="keyword">class</span> TestPrototype;</div><div class="line">    pure virtual task test ();</div><div class="line">endclass: TestPrototype</div><div class="line"></div><div class="line"><span class="keyword">class</span> TestFactory;</div><div class="line">    <span class="keyword">static</span> local TestPrototype tests[string];</div><div class="line">    <span class="keyword">static</span> <span class="keyword">function</span> <span class="keyword">void</span> register (TestPrototype obj, string test_name);</div><div class="line">        <span class="keyword">assert</span>(obj != <span class="keyword">null</span>) </div><div class="line">        <span class="keyword">else</span> <span class="keyword">begin</span></div><div class="line">            $display(<span class="string">"Can't register null object in factory!!"</span>);</div><div class="line">            <span class="keyword">return</span>; <span class="keyword">end</span></div><div class="line">        <span class="keyword">if</span> (tests.exists(test_name)) <span class="keyword">begin</span></div><div class="line">            $display(<span class="string">"Override obj registered with '%s'!!"</span>, test_name); <span class="keyword">end</span></div><div class="line">        tests[test_name] = obj;</div><div class="line">    endfunction: register</div><div class="line">    <span class="keyword">static</span> task run_test (string test_name);</div><div class="line">        <span class="keyword">if</span> (!tests.exists(test_name)) <span class="keyword">begin</span></div><div class="line">            $display(<span class="string">"Can't find %s in factory!!"</span>, test_name);</div><div class="line">            <span class="keyword">return</span>; <span class="keyword">end</span></div><div class="line">        tests[test_name].test();</div><div class="line">    endfunction: run_test</div><div class="line">endclass</div><div class="line"></div><div class="line">`define __register(T) \</div><div class="line"><span class="keyword">static</span> local T reg_obj = get(); \</div><div class="line"><span class="keyword">static</span> local <span class="keyword">function</span> T get(); \</div><div class="line">    <span class="keyword">if</span> (reg_obj == <span class="keyword">null</span>) <span class="keyword">begin</span> \</div><div class="line">        reg_obj = <span class="keyword">new</span>();  \</div><div class="line">        TestFactory::register(reg_obj, `<span class="string">"T`"</span>); \</div><div class="line">    <span class="keyword">end</span> \</div><div class="line">    <span class="keyword">return</span> reg_obj; \</div><div class="line">endfunction</div></pre></td></tr></table></figure>
+
+<h2 id="注册类原型">注册类原型</h2>
+<p>首先是<code>test</code>的原型父类<code>TestPrototype</code>, 这个类只需要一个纯虚task <code>test</code>, 做个对照的话, 这个task相当于<code>uvm_test</code>这个父类里的所有<code>phase</code>函数.</p>
+<p>原型父类用抽象类来实现, 其实用interface class接口类的话是一种更好的实现, 这样可以在不改变原继承关系的情况下为任意的类实现接口. 只不过现在Cadence的Incisive(竟然)还不支持interface class, 为了兼容性只能退而求其次了.</p>
+<h2 id="工厂">工厂</h2>
+<p>接下来是工厂<code>TestFactory</code>. 总的说来, 框架里的工厂都是全局的单例. 简便起见, 这里用静态成员和静态方法实现工厂类.</p>
+<p>成员<code>tests</code>是个联合数组(哈希表), 存储类型是<code>TestPrototype</code>, 索引类型是字符串, 用于保存工厂注册的对象. <code>TestPrototype</code>是抽象类, 是不能例化, 不过父类句柄是可以<br>携带子类对象, <strong>因此实际上联合数组里存储的都是<code>TestPrototype</code>的子类对象</strong>. <code>tests</code>用<code>local</code>修饰以防外部的篡改.</p>
+<p>方法<code>register</code>用于注册, 将输入参数<code>TestPrototype</code>对象(同样的, 这里输入的都是<code>TestPrototype</code>的子类对象)与字符串<code>test_name</code>作为一组value-key存入联合数组. 最前面是空句柄检查, 这里选择检查到空句柄的时候提供告警log并直接退出, 以防空句柄之后调用的时候引起运行错误. 之后是字符串重复注册的处理, 这里的选择是提供告警使用新的对象覆盖.</p>
+<p>方法<code>run_test</code>就是这个demo里使用的实际接口, <code>run_test</code>根据输入的字符串在联合数组<code>tests</code>中查找<code>TestPrototype</code>对象, 查找失败就告警返回, 查找成功就调用该对象的<code>test()</code>方法. 这里使用了多态特性, 由于<code>tests</code>句柄中携带的都是子类对象, 因此调用的都是子类实现的实际使用的<code>test()</code>.</p>
+<h2 id="自动注册宏">自动注册宏</h2>
+<p>为了更好的模拟UVM, 这里提供了一个<code>__register</code>宏来提供自动注册的功能. </p>
+<p>对于用例对象来讲, 需要在<code>run_test</code>之前完成注册, 而UVM中的<code>run_test</code>是在0时刻运行的, 因此自动注册是非常重要的, <code>__register</code>宏也是这个demo里面真正的核心.</p>
+<p><code>__register</code>宏的用法跟UVM的<code>uvm_*_util</code>宏一致, 在类定义里面调用宏传入类名参数.<br><code>__register</code>生成该类名下的私有静态成员变量, 并直接用<code>get</code>方法初始化. <code>get</code>方法是私有静态方法, 用来创建单例对象<code>reg_obj</code>并进行注册. </p>
+<p>这种方式跟<strong>饿汉式单例模式中</strong>是一致的, 保证了用例对象的单例在类载入也就是所有线程启动之前就完成了自动的注册. UVM也使用的这种方法, 不过隐藏的更深一点, 直接从<code>uvm_*_util</code>宏里面是看不出来的:)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/03/28/note_asic/run_test_demo/" data-id="v4z7gz7ttqlrn9m3" class="article-share-link" data-share="baidu">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/28/note_asic/commandline_processor/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">UVM Commandline Processor</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">November 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/28/note_asic/run_test_demo/">一个工厂小demo实现UVM的run_test</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/28/note_asic/commandline_processor/">UVM Commandline Processor</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/28/note_asic/uvm_factory_next/">UVM源码探索之Factory(下篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/27/note_asic/uvm_factory/">UVM源码探索之Factory(上篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/27/note_asic/verif_crafts/">Verification匠心</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/zhouchuanrui" target="_blank">github</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Mr.Zhou<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
