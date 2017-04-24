@@ -95,7 +95,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>run_test</code>是UVM的一大卖点. <code>run_test</code>根据运行时的参数<code>+UVM_TESTNAME=[test_name]</code>来例化<code>[test_name]</code>对应的继承自<code>UVM_TEST</code>的子类对象并运行, 把所有的用例一起编译之后, 就可以实现”一次编译, 多次运行”.</p>
+        <p><code>run_test</code>是UVM的一大卖点. <code>run_test</code>根据运行时的参数<code>+UVM_TESTNAME=[test_name]</code>来例化<code>[test_name]</code>对应的继承自<code>UVM_TEST</code>的子类对象并运行. 把所有的用例一起编译之后, 就可以实现”一次编译, 多次运行”.</p>
 <p>说到UVM的Factory工厂, 大家的第一反应可能是Factory的<code>create</code>例化:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">usr_obj = usr_ojbect_class::type_id::create(<span class="string">"obj_name"</span>);</div><div class="line">usr_com = usr_com_class::type_id::create(<span class="string">"com_name"</span>, <span class="keyword">this</span>);</div></pre></td></tr></table></figure>
 
